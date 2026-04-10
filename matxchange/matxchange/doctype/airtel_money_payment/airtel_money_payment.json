@@ -1,0 +1,189 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "AIR-.YYYY.-.#####",
+ "creation": "2026-04-10 03:29:18.886723",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_huk9",
+  "amended_from",
+  "transaction_id",
+  "phone_number",
+  "amount_kes",
+  "payment_type",
+  "status",
+  "payment_date",
+  "section_break_plqd",
+  "linked_doctype",
+  "linked_document",
+  "picker",
+  "section_break_apeg",
+  "airtel_reference",
+  "result_code",
+  "result_description"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_huk9",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Airtel Money Payment",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "transaction_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Transaction ID",
+   "reqd": 1
+  },
+  {
+   "fieldname": "phone_number",
+   "fieldtype": "Phone",
+   "in_list_view": 1,
+   "label": "Phone Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amount_kes",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Amount KES",
+   "reqd": 1
+  },
+  {
+   "fieldname": "payment_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Payment Type",
+   "options": "Disbursement\nCollection",
+   "reqd": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Pending\nCompleted\nFailed",
+   "reqd": 1
+  },
+  {
+   "fieldname": "payment_date",
+   "fieldtype": "Datetime",
+   "label": "Payment Date"
+  },
+  {
+   "fieldname": "section_break_plqd",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "linked_doctype",
+   "fieldtype": "Data",
+   "label": "Linked Doctype"
+  },
+  {
+   "fieldname": "linked_document",
+   "fieldtype": "Data",
+   "label": "Linked Document"
+  },
+  {
+   "fieldname": "picker",
+   "fieldtype": "Link",
+   "label": "Picker",
+   "options": "Picker Profile"
+  },
+  {
+   "fieldname": "section_break_apeg",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "airtel_reference",
+   "fieldtype": "Data",
+   "label": "Airtel Reference"
+  },
+  {
+   "fieldname": "result_code",
+   "fieldtype": "Data",
+   "label": "Result Code"
+  },
+  {
+   "fieldname": "result_description",
+   "fieldtype": "Text",
+   "label": "Result Description"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-04-10 04:57:38.801610",
+ "modified_by": "Administrator",
+ "module": "Matxchange",
+ "name": "Airtel Money Payment",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Picker",
+   "share": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Collector",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Matxchange Admin",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "search_fields": "transaction_id,phone_number",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "transaction_id"
+}

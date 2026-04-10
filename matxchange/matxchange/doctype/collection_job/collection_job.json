@@ -1,0 +1,211 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "CJ-.YYYY.-.#####",
+ "creation": "2026-04-10 04:33:55.590651",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_ersv",
+  "amended_from",
+  "job_date",
+  "collector",
+  "picker",
+  "waste_category",
+  "section_break_ucwi",
+  "estimated_quantity_kg",
+  "actual_quantity_kg",
+  "column_break_ecjr",
+  "status",
+  "column_break_rvbo",
+  "waste_transaction",
+  "collection_run",
+  "section_break_mvau",
+  "gps_latitude",
+  "gps_longitude",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_ersv",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Collection Job",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "job_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Job Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "collector",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Collector",
+   "options": "Collector Profile",
+   "reqd": 1
+  },
+  {
+   "fieldname": "picker",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Picker",
+   "options": "Picker Profile",
+   "reqd": 1
+  },
+  {
+   "fieldname": "waste_category",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Waste Category",
+   "options": "Waste Category",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_ucwi",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "estimated_quantity_kg",
+   "fieldtype": "Float",
+   "label": "Estimated Quantity KG"
+  },
+  {
+   "fieldname": "actual_quantity_kg",
+   "fieldtype": "Float",
+   "label": "Actual Quantity KG"
+  },
+  {
+   "fieldname": "column_break_ecjr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Scheduled\nIn Progress\nCompleted\nCancelled",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_rvbo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "waste_transaction",
+   "fieldtype": "Link",
+   "label": "Waste Transaction",
+   "options": "Waste Transaction"
+  },
+  {
+   "fieldname": "collection_run",
+   "fieldtype": "Link",
+   "label": "Collection Run",
+   "options": "Collection Run"
+  },
+  {
+   "fieldname": "section_break_mvau",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "gps_latitude",
+   "fieldtype": "Float",
+   "label": "GPS Latitude"
+  },
+  {
+   "fieldname": "gps_longitude",
+   "fieldtype": "Float",
+   "label": "GPS Longitude"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text",
+   "label": "Notes"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-04-10 05:06:14.520414",
+ "modified_by": "Administrator",
+ "module": "Matxchange",
+ "name": "Collection Job",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Picker",
+   "share": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Collector",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Fleet Manager",
+   "share": 1
+  },
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Matxchange Admin",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "search_fields": "collector,picker",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "collector"
+}

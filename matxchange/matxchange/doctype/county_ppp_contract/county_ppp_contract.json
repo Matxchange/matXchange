@@ -1,0 +1,196 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "PPP-.YYYY.-.#####",
+ "creation": "2026-04-10 04:25:01.171701",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_a75k",
+  "amended_from",
+  "county_name",
+  "contract_type",
+  "start_date",
+  "end_date",
+  "column_break_ddwy",
+  "contract_value_kes",
+  "status",
+  "column_break_csib",
+  "county_officer_name",
+  "county_office_phone",
+  "contract_file",
+  "column_break_nxqv",
+  "stellar_hash",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_a75k",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "County PPP Contract",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "county_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "County Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "contract_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Contract Type",
+   "options": "Waste Collection\nRecycling\nAwareness\nOther",
+   "reqd": 1
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Start Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "End Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_ddwy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "contract_value_kes",
+   "fieldtype": "Currency",
+   "label": "Contract Value KES"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Draft\nActive\nExpired\nTerminated",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_csib",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "county_officer_name",
+   "fieldtype": "Data",
+   "label": "County Officer Name"
+  },
+  {
+   "fieldname": "county_office_phone",
+   "fieldtype": "Phone",
+   "label": "County Office Phone"
+  },
+  {
+   "fieldname": "contract_file",
+   "fieldtype": "Attach",
+   "label": "Contract File"
+  },
+  {
+   "fieldname": "column_break_nxqv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "stellar_hash",
+   "fieldtype": "Data",
+   "label": "Stellar Hash"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text",
+   "label": "Notes"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-04-10 10:12:22.609801",
+ "modified_by": "Administrator",
+ "module": "Matxchange",
+ "name": "County PPP Contract",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "County Officer",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Regulator",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "DFI Viewer",
+   "share": 1
+  },
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Matxchange Admin",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "search_fields": "county_name,contract_type",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "county_name"
+}

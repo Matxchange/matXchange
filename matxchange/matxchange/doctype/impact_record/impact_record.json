@@ -1,0 +1,183 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "IR-.YYYY.-.#####",
+ "creation": "2026-04-10 04:15:33.650564",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_umcc",
+  "amended_from",
+  "period",
+  "actor_type",
+  "collector",
+  "recycler",
+  "section_break_fvuz",
+  "total_waste_kg",
+  "total_transactions",
+  "total_earnings_kes",
+  "column_break_uljd",
+  "carbon_saved_kg",
+  "trees_equivalent",
+  "column_break_hkot",
+  "stellar_hash"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_umcc",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Impact Record",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "period",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Period",
+   "reqd": 1
+  },
+  {
+   "fieldname": "actor_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Actor Type",
+   "options": "Picker\nCollector\nRecycler\nPlatform",
+   "reqd": 1
+  },
+  {
+   "fieldname": "collector",
+   "fieldtype": "Link",
+   "label": "Collector",
+   "options": "Collector Profile"
+  },
+  {
+   "fieldname": "recycler",
+   "fieldtype": "Link",
+   "label": "Recycler",
+   "options": "Recycler Profile"
+  },
+  {
+   "fieldname": "section_break_fvuz",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_waste_kg",
+   "fieldtype": "Float",
+   "label": "Total Waste KG"
+  },
+  {
+   "fieldname": "total_transactions",
+   "fieldtype": "Int",
+   "label": "Total Transactions"
+  },
+  {
+   "fieldname": "total_earnings_kes",
+   "fieldtype": "Currency",
+   "label": "Total Earnings KES"
+  },
+  {
+   "fieldname": "column_break_uljd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "carbon_saved_kg",
+   "fieldtype": "Float",
+   "label": "Carbon Saved KG"
+  },
+  {
+   "fieldname": "trees_equivalent",
+   "fieldtype": "Float",
+   "label": "Trees Equivalent"
+  },
+  {
+   "fieldname": "column_break_hkot",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "stellar_hash",
+   "fieldtype": "Data",
+   "label": "Stellar Hash"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-04-10 10:18:36.973770",
+ "modified_by": "Administrator",
+ "module": "Matxchange",
+ "name": "Impact Record",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Regulator",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "DFI Viewer",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "County Officer",
+   "share": 1
+  },
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Matxchange Admin",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "search_fields": "actor_type,period",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "actor_type"
+}

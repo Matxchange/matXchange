@@ -1,0 +1,240 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "ML-.YYYY.-.#####",
+ "creation": "2026-04-10 03:56:21.346578",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_t37z",
+  "amended_from",
+  "product_name",
+  "seller_type",
+  "recycler",
+  "upcycler",
+  "waste_category",
+  "product_batch",
+  "column_break_koti",
+  "quantity_available_kg",
+  "price_per_kg_kes",
+  "minimum_order_kg",
+  "column_break_zied",
+  "status",
+  "section_break_rjqj",
+  "listing_date",
+  "expiry_date",
+  "description",
+  "photo"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_t37z",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Marketplace Listing",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "product_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Product Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "seller_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Seller Type",
+   "options": "Recycler\nUpcycler\nCollector",
+   "reqd": 1
+  },
+  {
+   "fieldname": "recycler",
+   "fieldtype": "Link",
+   "label": "Recycler",
+   "options": "Recycler Profile"
+  },
+  {
+   "fieldname": "upcycler",
+   "fieldtype": "Link",
+   "label": "Upcycler",
+   "options": "Upcycler Profile"
+  },
+  {
+   "fieldname": "waste_category",
+   "fieldtype": "Link",
+   "label": "Waste Category",
+   "options": "Waste Category"
+  },
+  {
+   "fieldname": "product_batch",
+   "fieldtype": "Link",
+   "label": "Product Batch",
+   "options": "Product Batch"
+  },
+  {
+   "fieldname": "column_break_koti",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "quantity_available_kg",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Quantity Available KG",
+   "reqd": 1
+  },
+  {
+   "fieldname": "price_per_kg_kes",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Price Per KG KES",
+   "reqd": 1
+  },
+  {
+   "fieldname": "minimum_order_kg",
+   "fieldtype": "Float",
+   "label": "Minimum Order KG"
+  },
+  {
+   "fieldname": "column_break_zied",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nSold\nExpired\nDraft",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_rjqj",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "listing_date",
+   "fieldtype": "Date",
+   "label": "Listing Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "expiry_date",
+   "fieldtype": "Date",
+   "label": "Expiry Date"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "photo",
+   "fieldtype": "Attach Image",
+   "label": "Photo"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-04-10 10:22:47.633324",
+ "modified_by": "Administrator",
+ "module": "Matxchange",
+ "name": "Marketplace Listing",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Recycler",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Upcycler",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Producer",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Marketplace",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "DFI Viewer",
+   "share": 1
+  },
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Matxchange Admin",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "search_fields": "product_name,seller_type",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "product_name"
+}

@@ -1,0 +1,213 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "CR-.YYYY.-.#####",
+ "creation": "2026-04-10 02:35:56.848649",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_uzjj",
+  "amended_from",
+  "run_date",
+  "collector",
+  "fleet_company_profile",
+  "driver",
+  "truck",
+  "column_break_rbnf",
+  "status",
+  "section_break_wuxz",
+  "total_weight_kg",
+  "total_transactions",
+  "total_amount_kes",
+  "column_break_zzcz",
+  "start_gps_latitude",
+  "start_gps_longitude",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_uzjj",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Collection Run",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "run_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Run Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "collector",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Collector",
+   "options": "Collector Profile",
+   "reqd": 1
+  },
+  {
+   "fieldname": "fleet_company_profile",
+   "fieldtype": "Link",
+   "label": "Fleet Company Profile",
+   "options": "Fleet Company Profile"
+  },
+  {
+   "fieldname": "driver",
+   "fieldtype": "Link",
+   "label": "Driver",
+   "options": "Driver"
+  },
+  {
+   "fieldname": "truck",
+   "fieldtype": "Link",
+   "label": "Truck",
+   "options": "Truck"
+  },
+  {
+   "fieldname": "column_break_rbnf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Planned\nIn Progress\nCompleted\nCancelled",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_wuxz",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_weight_kg",
+   "fieldtype": "Float",
+   "label": "Total Weight KG"
+  },
+  {
+   "fieldname": "total_transactions",
+   "fieldtype": "Int",
+   "label": "Total Transactions"
+  },
+  {
+   "fieldname": "total_amount_kes",
+   "fieldtype": "Currency",
+   "label": "Total Amount KES"
+  },
+  {
+   "fieldname": "column_break_zzcz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "start_gps_latitude",
+   "fieldtype": "Float",
+   "label": "Start GPS Latitude"
+  },
+  {
+   "fieldname": "start_gps_longitude",
+   "fieldtype": "Float",
+   "label": "Start GPS Longitude"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text",
+   "label": "Notes"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-04-10 05:08:21.401332",
+ "modified_by": "Administrator",
+ "module": "Matxchange",
+ "name": "Collection Run",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Picker",
+   "share": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Collector",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Fleet Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Regulator",
+   "share": 1
+  },
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Matxchange Admin",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "search_fields": "collector,run_date",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "collector"
+}

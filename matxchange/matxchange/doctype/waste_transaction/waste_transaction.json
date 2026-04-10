@@ -1,0 +1,292 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "MATX-.YYYY.-.#####",
+ "creation": "2026-04-10 02:18:22.169955",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_6e8n",
+  "amended_from",
+  "transaction_date",
+  "picker",
+  "collector",
+  "waste_category",
+  "quantity_kg",
+  "unit_price_kes",
+  "payment_section",
+  "total_amount_kes",
+  "payment_method",
+  "payment_status",
+  "column_break_vjbr",
+  "payment_reference",
+  "payment_date",
+  "dispute_notes",
+  "verification_section",
+  "iot_scale_id",
+  "scale_reading_kg",
+  "qr_code",
+  "column_break_orfz",
+  "stellar_hash",
+  "column_break_ozss",
+  "gps_latitude",
+  "gps_longitude",
+  "photo_evidence"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_6e8n",
+   "fieldtype": "Section Break",
+   "label": "Transcation Details"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Waste Transaction",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "transaction_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Transaction Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "picker",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Picker",
+   "options": "Picker Profile",
+   "reqd": 1
+  },
+  {
+   "fieldname": "collector",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Collector",
+   "options": "Collector Profile",
+   "reqd": 1
+  },
+  {
+   "fieldname": "waste_category",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Waste Category",
+   "options": "Waste Category",
+   "reqd": 1
+  },
+  {
+   "fieldname": "quantity_kg",
+   "fieldtype": "Float",
+   "label": "Quantity KG",
+   "reqd": 1
+  },
+  {
+   "fieldname": "unit_price_kes",
+   "fieldtype": "Currency",
+   "label": "Unit Price KES",
+   "reqd": 1
+  },
+  {
+   "fieldname": "payment_section",
+   "fieldtype": "Section Break",
+   "label": "Payment"
+  },
+  {
+   "fieldname": "total_amount_kes",
+   "fieldtype": "Currency",
+   "label": "Total Amount KES",
+   "reqd": 1
+  },
+  {
+   "fieldname": "payment_method",
+   "fieldtype": "Select",
+   "label": "Payment Method",
+   "options": "M-Pesa\nAirtel Money\nCash",
+   "reqd": 1
+  },
+  {
+   "fieldname": "payment_status",
+   "fieldtype": "Select",
+   "label": "Payment Status",
+   "options": "Pending\nPaid\nFailed\nDisputed",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_vjbr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "payment_reference",
+   "fieldtype": "Data",
+   "label": "Payment Reference"
+  },
+  {
+   "fieldname": "payment_date",
+   "fieldtype": "Date",
+   "label": "Payment Date"
+  },
+  {
+   "fieldname": "dispute_notes",
+   "fieldtype": "Text",
+   "label": "Dispute Notes"
+  },
+  {
+   "fieldname": "verification_section",
+   "fieldtype": "Section Break",
+   "label": "Verification"
+  },
+  {
+   "fieldname": "iot_scale_id",
+   "fieldtype": "Link",
+   "label": "IOT Scale ID",
+   "options": "IOT Scale"
+  },
+  {
+   "fieldname": "scale_reading_kg",
+   "fieldtype": "Float",
+   "label": "Scale Reading KG"
+  },
+  {
+   "fieldname": "qr_code",
+   "fieldtype": "Data",
+   "label": "QR Code"
+  },
+  {
+   "fieldname": "column_break_orfz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "stellar_hash",
+   "fieldtype": "Data",
+   "label": "Stellar Hash"
+  },
+  {
+   "fieldname": "column_break_ozss",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "gps_latitude",
+   "fieldtype": "Float",
+   "label": "GPS Latitude"
+  },
+  {
+   "fieldname": "gps_longitude",
+   "fieldtype": "Float",
+   "label": "GPS Longitude"
+  },
+  {
+   "fieldname": "photo_evidence",
+   "fieldtype": "Attach Image",
+   "label": "Photo Evidence"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-04-10 12:28:04.501903",
+ "modified_by": "Administrator",
+ "module": "Matxchange",
+ "name": "Waste Transaction",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Picker",
+   "share": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Collector",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Recycler",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Regulator",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "DFI Viewer",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "County Officer",
+   "share": 1
+  },
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Matxchange Admin",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "search_fields": "picker,collector,waste_category",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "picker"
+}

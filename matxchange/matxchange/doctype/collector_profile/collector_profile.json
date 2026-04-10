@@ -1,0 +1,374 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "COL-.YYYY.-.#####",
+ "creation": "2026-04-10 00:19:16.572571",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_lndy",
+  "amended_from",
+  "company_name",
+  "registration_number",
+  "contact_person",
+  "column_break_jiiz",
+  "phone_number",
+  "email",
+  "photo",
+  "location_section",
+  "county",
+  "sub_county",
+  "physical_address",
+  "column_break_voxt",
+  "gps_latitude",
+  "gps_longitude",
+  "coverage_area",
+  "operations_section",
+  "waste_categories",
+  "number_of_pickers",
+  "has_weighing_scale",
+  "column_break_vpvn",
+  "storage_capacity_kg",
+  "operating_hours",
+  "license_number",
+  "payment_section",
+  "preferred_payment_method",
+  "mpesa_paybill",
+  "airtel_money_number",
+  "column_break_eyip",
+  "bank_name",
+  "bank_account_number",
+  "bank_account_name",
+  "registration_section",
+  "collector_id",
+  "registration_date",
+  "status",
+  "column_break_tats",
+  "assigned_recycler",
+  "kra_pin",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_lndy",
+   "fieldtype": "Section Break",
+   "label": "Company Identity"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Collector Profile",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "company_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Company Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "registration_number",
+   "fieldtype": "Data",
+   "label": "Registration Number"
+  },
+  {
+   "fieldname": "contact_person",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Contact Person",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_jiiz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "phone_number",
+   "fieldtype": "Phone",
+   "in_list_view": 1,
+   "label": "Phone Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email"
+  },
+  {
+   "fieldname": "photo",
+   "fieldtype": "Attach Image",
+   "label": "Photo"
+  },
+  {
+   "fieldname": "location_section",
+   "fieldtype": "Section Break",
+   "label": "Location"
+  },
+  {
+   "fieldname": "county",
+   "fieldtype": "Data",
+   "label": "County",
+   "reqd": 1
+  },
+  {
+   "fieldname": "sub_county",
+   "fieldtype": "Data",
+   "label": "Sub County"
+  },
+  {
+   "fieldname": "physical_address",
+   "fieldtype": "Text",
+   "label": "Physical Address"
+  },
+  {
+   "fieldname": "column_break_voxt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "gps_latitude",
+   "fieldtype": "Float",
+   "label": "GPS Latitude"
+  },
+  {
+   "fieldname": "gps_longitude",
+   "fieldtype": "Float",
+   "label": "GPS Longitude"
+  },
+  {
+   "fieldname": "coverage_area",
+   "fieldtype": "Text",
+   "label": "Coverage Area"
+  },
+  {
+   "fieldname": "operations_section",
+   "fieldtype": "Section Break",
+   "label": "Operations"
+  },
+  {
+   "fieldname": "waste_categories",
+   "fieldtype": "Text",
+   "label": "Waste Categories"
+  },
+  {
+   "fieldname": "number_of_pickers",
+   "fieldtype": "Int",
+   "label": "Number of Pickers"
+  },
+  {
+   "default": "0",
+   "fieldname": "has_weighing_scale",
+   "fieldtype": "Check",
+   "label": "Has Weighing Scale"
+  },
+  {
+   "fieldname": "column_break_vpvn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "storage_capacity_kg",
+   "fieldtype": "Float",
+   "label": "Storage Capacity KG"
+  },
+  {
+   "fieldname": "operating_hours",
+   "fieldtype": "Data",
+   "label": "Operating Hours"
+  },
+  {
+   "fieldname": "license_number",
+   "fieldtype": "Data",
+   "label": "License Number"
+  },
+  {
+   "fieldname": "payment_section",
+   "fieldtype": "Section Break",
+   "label": "Payment"
+  },
+  {
+   "fieldname": "preferred_payment_method",
+   "fieldtype": "Select",
+   "label": "Preferred Payment Method",
+   "options": "M-Pesa\nAirtel Money\nBank Transfer\nCash",
+   "reqd": 1
+  },
+  {
+   "fieldname": "mpesa_paybill",
+   "fieldtype": "Data",
+   "label": "MPesa Paybill"
+  },
+  {
+   "fieldname": "airtel_money_number",
+   "fieldtype": "Data",
+   "label": "Airtel Money Number"
+  },
+  {
+   "fieldname": "column_break_eyip",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "bank_name",
+   "fieldtype": "Data",
+   "label": "Bank Name"
+  },
+  {
+   "fieldname": "bank_account_number",
+   "fieldtype": "Data",
+   "label": "Bank Account Number"
+  },
+  {
+   "fieldname": "bank_account_name",
+   "fieldtype": "Data",
+   "label": "Bank Account Name"
+  },
+  {
+   "fieldname": "registration_section",
+   "fieldtype": "Section Break",
+   "label": "Registration"
+  },
+  {
+   "fieldname": "collector_id",
+   "fieldtype": "Data",
+   "label": "Collector ID"
+  },
+  {
+   "fieldname": "registration_date",
+   "fieldtype": "Date",
+   "label": "Registration Date"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nInactive\nSuspended",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_tats",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "assigned_recycler",
+   "fieldtype": "Link",
+   "label": "Assigned Recycler",
+   "options": "Recycler Profile"
+  },
+  {
+   "fieldname": "kra_pin",
+   "fieldtype": "Data",
+   "label": "KRA PIN"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text",
+   "label": "Notes"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-04-10 10:08:39.901536",
+ "modified_by": "Administrator",
+ "module": "Matxchange",
+ "name": "Collector Profile",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Picker",
+   "share": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Collector",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Recycler",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Regulator",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "DFI Viewer",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "County Officer",
+   "share": 1
+  },
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Matxchange Admin",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "search_fields": "company_name,phone_number,contact_person",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "company_name"
+}

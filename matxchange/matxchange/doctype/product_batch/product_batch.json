@@ -1,0 +1,229 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "PB-.YYYY.-.#####",
+ "creation": "2026-04-10 03:01:21.667702",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_tm1k",
+  "amended_from",
+  "product_name",
+  "recycler",
+  "processing_record",
+  "quantity_kg",
+  "quality_grade",
+  "production_date",
+  "expiry_date",
+  "section_break_gflh",
+  "qr_code",
+  "nfc_tag_id",
+  "stellar_hash",
+  "column_break_gtgj",
+  "status",
+  "column_break_zzhf",
+  "price_per_kg_kes",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_tm1k",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Product Batch",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "product_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Product Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "recycler",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Recycler",
+   "options": "Recycler Profile",
+   "reqd": 1
+  },
+  {
+   "fieldname": "processing_record",
+   "fieldtype": "Link",
+   "label": "Processing Record",
+   "options": "Processing Record"
+  },
+  {
+   "fieldname": "quantity_kg",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Quantity KG",
+   "reqd": 1
+  },
+  {
+   "fieldname": "quality_grade",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Quality Grade",
+   "options": "A\nB\nC",
+   "reqd": 1
+  },
+  {
+   "fieldname": "production_date",
+   "fieldtype": "Date",
+   "label": "Production Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "expiry_date",
+   "fieldtype": "Date",
+   "label": "Expiry Date"
+  },
+  {
+   "fieldname": "section_break_gflh",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "qr_code",
+   "fieldtype": "Data",
+   "label": "QR Code"
+  },
+  {
+   "fieldname": "nfc_tag_id",
+   "fieldtype": "Data",
+   "label": "NFC Tag ID"
+  },
+  {
+   "fieldname": "stellar_hash",
+   "fieldtype": "Data",
+   "label": "Stellar Hash"
+  },
+  {
+   "fieldname": "column_break_gtgj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Available\nSold\nReserved",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_zzhf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "price_per_kg_kes",
+   "fieldtype": "Currency",
+   "label": "Price Per KG KES"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text",
+   "label": "Notes"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-04-10 12:21:04.208236",
+ "modified_by": "Administrator",
+ "module": "Matxchange",
+ "name": "Product Batch",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Recycler",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Upcycler",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Marketplace",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Producer",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "DFI Viewer",
+   "share": 1
+  },
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Matxchange Admin",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "search_fields": "recycler,product_name",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "recycler"
+}

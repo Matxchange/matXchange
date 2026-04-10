@@ -1,0 +1,201 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "PR-.YYYY.-.#####",
+ "creation": "2026-04-10 02:55:14.494017",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_pudv",
+  "amended_from",
+  "processing_date",
+  "recycler",
+  "column_break_kyph",
+  "input_waste_category",
+  "input_waste_kg",
+  "output_quantity_kg",
+  "processing_loss_kg",
+  "column_break_kfht",
+  "output_product",
+  "processing_method",
+  "energy_used_kwh",
+  "carbon_saved_kg",
+  "column_break_ppxm",
+  "stellar_hash",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_pudv",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Processing Record",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "processing_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Processing Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "recycler",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Recycler",
+   "options": "Recycler Profile",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_kyph",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "input_waste_category",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Input Waste Category",
+   "options": "Waste Category",
+   "reqd": 1
+  },
+  {
+   "fieldname": "input_waste_kg",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Input Waste KG",
+   "reqd": 1
+  },
+  {
+   "fieldname": "output_quantity_kg",
+   "fieldtype": "Float",
+   "label": "Output Quantity KG"
+  },
+  {
+   "fieldname": "processing_loss_kg",
+   "fieldtype": "Float",
+   "label": "Processing Loss KG"
+  },
+  {
+   "fieldname": "column_break_kfht",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "output_product",
+   "fieldtype": "Data",
+   "label": "Output Product"
+  },
+  {
+   "fieldname": "processing_method",
+   "fieldtype": "Data",
+   "label": "Processing Method"
+  },
+  {
+   "fieldname": "energy_used_kwh",
+   "fieldtype": "Float",
+   "label": "Energy Used KWH"
+  },
+  {
+   "fieldname": "carbon_saved_kg",
+   "fieldtype": "Float",
+   "label": "Carbon Saved KG"
+  },
+  {
+   "fieldname": "column_break_ppxm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "stellar_hash",
+   "fieldtype": "Data",
+   "label": "Stellar Hash"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text",
+   "label": "Notes"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-04-10 10:31:17.466323",
+ "modified_by": "Administrator",
+ "module": "Matxchange",
+ "name": "Processing Record",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Recycler",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Regulator",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "DFI Viewer",
+   "share": 1
+  },
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Matxchange Admin",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "search_fields": "recycler,input_waste_category",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "recycler"
+}

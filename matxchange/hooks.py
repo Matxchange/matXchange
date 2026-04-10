@@ -250,3 +250,8 @@ app_license = "mit"
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
 
+
+# USSD Handler - Allow ngrok bypass
+override_whitelisted_methods = {
+    "matxchange.utils.ussd.handler": "matxchange.utils.ussd.handler"
+}

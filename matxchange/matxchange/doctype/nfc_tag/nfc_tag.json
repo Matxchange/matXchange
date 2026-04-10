@@ -1,0 +1,125 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:tag_id",
+ "creation": "2026-04-10 03:21:00.502818",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "tag_id",
+  "linked_doctype",
+  "linked_document",
+  "section_break_flzi",
+  "programmed_date",
+  "is_active",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "tag_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Tag ID",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "linked_doctype",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Linked Doctype",
+   "reqd": 1
+  },
+  {
+   "fieldname": "linked_document",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Linked Document",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_flzi",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "programmed_date",
+   "fieldtype": "Date",
+   "label": "Programmed Date"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "label": "Is Active"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text",
+   "label": "Notes"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-04-10 10:27:00.401107",
+ "modified_by": "Administrator",
+ "module": "Matxchange",
+ "name": "NFC Tag",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Collector",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Recycler",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Matxchange Admin",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "search_fields": "tag_id,linked_doctype",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "tag_id"
+}

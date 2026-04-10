@@ -1,0 +1,222 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "PRC-.YYYY.-.#####",
+ "creation": "2026-04-10 02:49:02.060771",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_3dj5",
+  "amended_from",
+  "procurement_date",
+  "collector",
+  "recycler",
+  "waste_category",
+  "column_break_hvrd",
+  "quantity_kg",
+  "price_per_kg_kes",
+  "total_amount_kes",
+  "column_break_vhnw",
+  "payment_method",
+  "payment_status",
+  "column_break_ypup",
+  "stellar_hash",
+  "quality_grade",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_3dj5",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Procurement Record",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "procurement_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Procurement Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "collector",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Collector",
+   "options": "Collector Profile",
+   "reqd": 1
+  },
+  {
+   "fieldname": "recycler",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Recycler",
+   "options": "Recycler Profile",
+   "reqd": 1
+  },
+  {
+   "fieldname": "waste_category",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Waste Category",
+   "options": "Waste Category",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_hvrd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "quantity_kg",
+   "fieldtype": "Float",
+   "label": "Quantity KG",
+   "reqd": 1
+  },
+  {
+   "fieldname": "price_per_kg_kes",
+   "fieldtype": "Currency",
+   "label": "Price Per KG KES",
+   "reqd": 1
+  },
+  {
+   "fieldname": "total_amount_kes",
+   "fieldtype": "Currency",
+   "label": "Total Amount KES",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_vhnw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "payment_method",
+   "fieldtype": "Select",
+   "label": "Payment Method",
+   "options": "Bank Transfer\nM-Pesa\nCash",
+   "reqd": 1
+  },
+  {
+   "fieldname": "payment_status",
+   "fieldtype": "Select",
+   "label": "Payment Status",
+   "options": "Pending\nPaid\nFailed",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_ypup",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "stellar_hash",
+   "fieldtype": "Data",
+   "label": "Stellar Hash"
+  },
+  {
+   "fieldname": "quality_grade",
+   "fieldtype": "Select",
+   "label": "Quality Grade",
+   "options": "A\nB\nC"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text",
+   "label": "Notes"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-04-10 10:30:34.693054",
+ "modified_by": "Administrator",
+ "module": "Matxchange",
+ "name": "Procurement Record",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Collector",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Recycler",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Regulator",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "DFI Viewer",
+   "share": 1
+  },
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Matxchange Admin",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "search_fields": "collector,recycler",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "collector"
+}

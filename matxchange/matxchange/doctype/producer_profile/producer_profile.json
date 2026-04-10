@@ -1,0 +1,330 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "PRD-.YYYY.-.#####",
+ "creation": "2026-04-10 02:02:13.657466",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_ssml",
+  "amended_from",
+  "company_name",
+  "registration_number",
+  "contact_person",
+  "column_break_oceg",
+  "phone_number",
+  "email",
+  "logo",
+  "location_section",
+  "county",
+  "physical_address",
+  "column_break_iyml",
+  "gps_latitude",
+  "gps_longitude",
+  "epr_details_section",
+  "industry_sector",
+  "annual_turnover_kes",
+  "number_of_employees",
+  "column_break_nkru",
+  "epr_registration_number",
+  "epr_registration_date",
+  "epr_expiry_date",
+  "waste_obligations_section",
+  "product_types",
+  "packaging_types",
+  "annual_waste_obligation_kg",
+  "column_break_tcdx",
+  "preferred_recycler",
+  "kra_pin",
+  "nema_license_number",
+  "registration_section",
+  "producer_id",
+  "registration_date",
+  "status",
+  "column_break_isxd",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_ssml",
+   "fieldtype": "Section Break",
+   "label": "Company Identity"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Producer Profile",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "company_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Company Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "registration_number",
+   "fieldtype": "Data",
+   "label": "Registration Number"
+  },
+  {
+   "fieldname": "contact_person",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Contact Person",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_oceg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "phone_number",
+   "fieldtype": "Phone",
+   "label": "Phone Number"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email"
+  },
+  {
+   "fieldname": "logo",
+   "fieldtype": "Attach Image",
+   "label": "Logo"
+  },
+  {
+   "fieldname": "location_section",
+   "fieldtype": "Section Break",
+   "label": "Location"
+  },
+  {
+   "fieldname": "county",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "County",
+   "reqd": 1
+  },
+  {
+   "fieldname": "physical_address",
+   "fieldtype": "Text",
+   "label": "Physical Address"
+  },
+  {
+   "fieldname": "column_break_iyml",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "gps_latitude",
+   "fieldtype": "Float",
+   "label": "GPS Latitude"
+  },
+  {
+   "fieldname": "gps_longitude",
+   "fieldtype": "Float",
+   "label": "GPS Longitude"
+  },
+  {
+   "fieldname": "epr_details_section",
+   "fieldtype": "Section Break",
+   "label": "EPR Details"
+  },
+  {
+   "fieldname": "industry_sector",
+   "fieldtype": "Select",
+   "label": "Industry Sector",
+   "options": "Food and Beverage\nPharmaceutical\nElectronics\nTextile\nAgriculture\nOther",
+   "reqd": 1
+  },
+  {
+   "fieldname": "annual_turnover_kes",
+   "fieldtype": "Currency",
+   "label": "Annual Turnover KES"
+  },
+  {
+   "fieldname": "number_of_employees",
+   "fieldtype": "Int",
+   "label": "Number of Employees"
+  },
+  {
+   "fieldname": "column_break_nkru",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "epr_registration_number",
+   "fieldtype": "Data",
+   "label": "EPR Registration Number"
+  },
+  {
+   "fieldname": "epr_registration_date",
+   "fieldtype": "Date",
+   "label": "EPR Registration Date"
+  },
+  {
+   "fieldname": "epr_expiry_date",
+   "fieldtype": "Date",
+   "label": "EPR Expiry Date"
+  },
+  {
+   "fieldname": "waste_obligations_section",
+   "fieldtype": "Section Break",
+   "label": "Waste Obligations"
+  },
+  {
+   "fieldname": "product_types",
+   "fieldtype": "Text",
+   "label": "Product Types",
+   "reqd": 1
+  },
+  {
+   "fieldname": "packaging_types",
+   "fieldtype": "Text",
+   "label": "Packaging Types"
+  },
+  {
+   "fieldname": "annual_waste_obligation_kg",
+   "fieldtype": "Float",
+   "label": "Annual Waste Obligation KG"
+  },
+  {
+   "fieldname": "column_break_tcdx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "preferred_recycler",
+   "fieldtype": "Link",
+   "label": "Preferred Recycler",
+   "options": "Recycler Profile"
+  },
+  {
+   "fieldname": "kra_pin",
+   "fieldtype": "Data",
+   "label": "KRA Pin"
+  },
+  {
+   "fieldname": "nema_license_number",
+   "fieldtype": "Data",
+   "label": "NEMA License Number"
+  },
+  {
+   "fieldname": "registration_section",
+   "fieldtype": "Section Break",
+   "label": "Registration"
+  },
+  {
+   "fieldname": "producer_id",
+   "fieldtype": "Data",
+   "label": "Producer ID"
+  },
+  {
+   "fieldname": "registration_date",
+   "fieldtype": "Date",
+   "label": "Registration Date"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nInactive\nSuspended"
+  },
+  {
+   "fieldname": "column_break_isxd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text",
+   "label": "Notes"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-04-10 10:32:17.647322",
+ "modified_by": "Administrator",
+ "module": "Matxchange",
+ "name": "Producer Profile",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Producer",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Recycler",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Regulator",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "DFI Viewer",
+   "share": 1
+  },
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Matxchange Admin",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "search_fields": "company_name,phone_number,contact_person",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "company_name"
+}
