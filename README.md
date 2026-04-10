@@ -5,7 +5,6 @@
 
 *Digitizing informal waste collection — paying pickers instantly — anchoring every kilogram to the blockchain*
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-2ECC71.svg?style=flat-square)](LICENSE)
 [![Platform](https://img.shields.io/badge/Frappe-v16-0089FF.svg?style=flat-square)](https://frappeframework.com)
 [![Blockchain](https://img.shields.io/badge/Stellar-Testnet-7B68EE.svg?style=flat-square)](https://stellar.org)
 [![Payments](https://img.shields.io/badge/M--Pesa-B2C-00A651.svg?style=flat-square)](https://developer.safaricom.co.ke)
