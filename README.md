@@ -5,11 +5,6 @@
 
 *Digitizing informal waste collection — paying pickers instantly — anchoring every kilogram to the blockchain*
 
-[![Platform](https://img.shields.io/badge/Frappe-v16-0089FF.svg?style=flat-square)](https://frappeframework.com)
-[![Blockchain](https://img.shields.io/badge/Stellar-Testnet-7B68EE.svg?style=flat-square)](https://stellar.org)
-[![Payments](https://img.shields.io/badge/M--Pesa-B2C-00A651.svg?style=flat-square)](https://developer.safaricom.co.ke)
-
-</div>
 
 ---
 
@@ -76,22 +71,6 @@ Add to `sites/your-site/site_config.json`:
   "stellar_network": "testnet"
 }
 ```
-
----
-
-## Roadmap
-
-- [x] 35 doctypes — full circular economy data model
-- [x] M-Pesa B2C automatic payments
-- [x] Stellar blockchain anchoring
-- [x] USSD interface for feature phones
-- [x] EPR certificate management
-- [x] Recycled materials marketplace
-- [ ] Role-based dashboards
-- [ ] Workflows and approvals
-- [ ] Production deployment
-- [ ] Airtel Money integration
-- [ ] Carbon credit minting on Stellar mainnet
 
 ---
 
