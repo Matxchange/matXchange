@@ -95,21 +95,16 @@ class WasteTransaction(Document):
 
     def write_to_stellar(self):
         try:
-            from matxchange.utils.stellar import write_transaction
-            data = {
-                "transaction_id": self.name,
-                "picker": self.picker,
-                "collector": self.collector,
-                "waste_category": self.waste_category,
-                "quantity_kg": self.quantity_kg,
-                "total_amount_kes": self.total_amount_kes,
-                "timestamp": str(now_datetime())
-            }
-            stellar_hash = write_transaction(data)
-            if stellar_hash:
-                frappe.db.set_value("Waste Transaction", self.name, "stellar_hash", stellar_hash)
+            from matxchange.utils.stellar import mint_reco_token
+            result = mint_reco_token(
+                collector_id=self.collector or self.picker,
+                weight_kg=self.quantity_kg,
+                transaction_id=self.name,
+            )
+            if result:
+                frappe.db.set_value("Waste Transaction", self.name, "stellar_hash", result["stellar_hash"])
                 frappe.msgprint(
-                    f"Blockchain hash: {stellar_hash[:20]}...",
+                    f"Blockchain hash: {result['stellar_hash'][:20]}... | {result['reco_amount']} RECO minted",
                     indicator="green"
                 )
         except Exception as e:
