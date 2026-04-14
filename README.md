@@ -14,10 +14,10 @@ The moat is the **RECO Token** — one token per kilogram of verified recyclable
 
 | Stakeholder | What MatXchange delivers |
 |---|---|
-| Picker | Instant M-Pesa payment on submission — no cash, no waiting |
+| Picker | Instant M-Pesa payment on submission |
 | Recycler | Verified material origin with full chain of custody |
-| Producer | Cryptographic EPR compliance proof — retired RECO tokens |
-| Regulator | Live national diversion data — no forged PDF audits |
+| Producer | Cryptographic EPR compliance proof via retired RECO tokens |
+| Regulator | Live national diversion data |
 | Carbon market | Immutable custody trail trusted by international registries |
 
 ---
@@ -31,7 +31,6 @@ The moat is the **RECO Token** — one token per kilogram of verified recyclable
 - [USSD Interface](#ussd-interface)
 - [RECO Token](#reco-token)
 - [Live Evidence](#live-evidence)
-- [Operational Gravity](#operational-gravity)
 - [Installation](#installation)
 - [Configuration](#configuration)
 
@@ -40,11 +39,12 @@ The moat is the **RECO Token** — one token per kilogram of verified recyclable
 ## The Value Chain
 
 ```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#0D9488", "primaryTextColor": "#ffffff", "primaryBorderColor": "#0D9488", "lineColor": "#6B7280", "edgeLabelBackground": "#F0FDFA", "fontFamily": "ui-monospace, monospace", "fontSize": "12px"}, "flowchart": {"curve": "basis", "nodeSpacing": 30, "rankSpacing": 40, "padding": 10}}}%%
 flowchart TD
-    A[Picker\nDelivers waste] -->|weight recorded\nM-Pesa fired| B[Collector\nAggregates material]
-    B -->|baled material\nRECO transferred| C[Recycler\nProcesses feedstock]
-    C -->|processed output\nchain of custody updated| D[Producer\nPurchases RECO]
-    D -->|retires tokens on-chain| E[NEMA Regulator\nEPR compliance verified]
+    A[Picker\nDelivers waste] -->|weight recorded · M-Pesa fired| B[Collector\nAggregates material]
+    B -->|baled material · RECO transferred| C[Recycler\nProcesses feedstock]
+    C -->|processed output · custody updated| D[Producer\nPurchases RECO]
+    D -->|retires tokens on-chain| E[NEMA\nEPR compliance verified]
     D -->|RECO bundles| F[Carbon Market\nVerra · Gold Standard]
 ```
 
@@ -53,6 +53,7 @@ flowchart TD
 ## System Architecture
 
 ```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#0D9488", "primaryTextColor": "#ffffff", "primaryBorderColor": "#0D9488", "lineColor": "#6B7280", "edgeLabelBackground": "#F0FDFA", "fontFamily": "ui-monospace, monospace", "fontSize": "12px"}, "flowchart": {"curve": "basis", "nodeSpacing": 30, "rankSpacing": 40, "padding": 10}}}%%
 flowchart TD
     A[USSD] -->|raw input| C[ERPNext Core]
     B[Web App] -->|REST API| C
@@ -73,6 +74,7 @@ flowchart TD
 The platform account is the RECO issuer — no trustline required. Every mint carries the ERPNext transaction ID as a memo, creating a permanent two-way link between the on-chain record and the ERPNext audit log.
 
 ```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#0D9488", "primaryTextColor": "#ffffff", "primaryBorderColor": "#0D9488", "lineColor": "#6B7280", "edgeLabelBackground": "#F0FDFA", "fontFamily": "ui-monospace, monospace", "fontSize": "12px"}, "flowchart": {"curve": "basis", "nodeSpacing": 30, "rankSpacing": 40, "padding": 10}}}%%
 flowchart TD
     A[mint_reco_token called\nweight_kg · transaction_id] --> B[build payment op\nRECO amount = weight_kg]
     B --> C[memo: ERPNext TX ID]
@@ -90,6 +92,7 @@ flowchart TD
 B2C disbursement fires automatically on Waste Transaction submit. The picker's phone number is fetched from their profile — no manual steps, no delays.
 
 ```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#0D9488", "primaryTextColor": "#ffffff", "primaryBorderColor": "#0D9488", "lineColor": "#6B7280", "edgeLabelBackground": "#F0FDFA", "fontFamily": "ui-monospace, monospace", "fontSize": "12px"}, "flowchart": {"curve": "basis", "nodeSpacing": 30, "rankSpacing": 40, "padding": 10}}}%%
 flowchart TD
     A[send_b2c_payment called] --> B[fetch picker mpesa_number]
     B --> C[Daraja B2C API request]
@@ -124,8 +127,9 @@ Powered by Africa's Talking · `matxchange.co.ke/api/method/matxchange.utils.uss
 ## RECO Token
 
 ```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#0D9488", "primaryTextColor": "#ffffff", "primaryBorderColor": "#0D9488", "lineColor": "#6B7280", "edgeLabelBackground": "#F0FDFA", "fontFamily": "ui-monospace, monospace", "fontSize": "12px"}, "flowchart": {"curve": "basis", "nodeSpacing": 30, "rankSpacing": 40, "padding": 10}}}%%
 flowchart TD
-    A[Phase 1 — Now\n1 RECO minted per kg at collection\nimmutable proof of work on-chain] --> B[Phase 2 — Month 6\nProducers buy RECO for EPR compliance\ntokens retired on-chain for NEMA]
+    A[Phase 1 — Now\n1 RECO per kg at collection\nimmutable proof of work on-chain] --> B[Phase 2 — Month 6\nProducers buy RECO for EPR compliance\ntokens retired on-chain for NEMA]
     B --> C[Phase 3 — Month 12\nRECO bundled into carbon credits\nKCR · Verra · Gold Standard\nUSD per tonne to international buyers]
 ```
 
@@ -156,12 +160,6 @@ Status          Paid
 
 ---
 
-## Operational Gravity
-
-The entire national pipeline — ERPNext core, Python workers, MariaDB, and all API hooks — runs on a single Hetzner CX33 at $8/month. World-class operational infrastructure does not require a Series A cloud budget.
-
----
-
 ## Installation
 
 ```bash
@@ -179,7 +177,7 @@ bench start
 
 ## Configuration
 
-`sites/your-site/site_config.json`
+Add the following keys to `sites/your-site/site_config.json`:
 
 ```json
 {
@@ -195,7 +193,7 @@ bench start
 }
 ```
 
-**Verify Stellar:**
+**Verify Stellar connection:**
 
 ```bash
 bench --site your-site.local console
@@ -207,4 +205,17 @@ test_reco_mint()
 
 ---
 
-MIT — Matxchange Ltd 2026
+<div align="center">
+
+**MatXchange** is proprietary infrastructure developed and owned by Matxchange Ltd.
+
+All concepts, architecture, token mechanisms, and system designs contained in this repository are the intellectual property of Matxchange Ltd and are protected under applicable intellectual property laws.
+
+The source code is made available under the [MIT License](LICENSE) for open collaboration.<br>
+The MatXchange name, RECO token concept, and circular economy operating system design are trademarks of Matxchange Ltd.
+
+&copy; 2026 Matxchange Ltd. All rights reserved.
+
+[matxchange.co.ke](https://matxchange.co.ke) &nbsp;·&nbsp; [samuel@matxchange.co.ke](mailto:samuel@matxchange.co.ke)
+
+</div>
