@@ -39,13 +39,13 @@ The moat is the **RECO Token** — one token per kilogram of verified recyclable
 ## The Value Chain
 
 ```mermaid
-%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#0D9488", "primaryTextColor": "#ffffff", "primaryBorderColor": "#0D9488", "lineColor": "#6B7280", "fontFamily": "ui-monospace, monospace", "fontSize": "12px"}, "flowchart": {"curve": "basis", "nodeSpacing": 30, "rankSpacing": 40, "padding": 10}}}%%
-flowchart LR
-    A[Picker] -->|M-Pesa fired| B[Collector]
-    B -->|RECO transferred| C[Recycler]
-    C -->|custody updated| D[Producer]
-    D -->|retires on-chain| E[NEMA]
-    D -->|RECO bundles| F[Carbon Market]
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#0D9488", "primaryTextColor": "#ffffff", "primaryBorderColor": "#0F766E", "lineColor": "#6B7280", "fontFamily": "ui-monospace, monospace", "fontSize": "13px"}}}%%
+flowchart TD
+    A[Picker] --> B[Collector]
+    B --> C[Recycler]
+    C --> D[Producer]
+    D --> E[NEMA Regulator]
+    D --> F[Carbon Market]
 ```
 
 ---
@@ -53,14 +53,14 @@ flowchart LR
 ## System Architecture
 
 ```mermaid
-%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#0D9488", "primaryTextColor": "#ffffff", "primaryBorderColor": "#0D9488", "lineColor": "#6B7280", "fontFamily": "ui-monospace, monospace", "fontSize": "12px"}, "flowchart": {"curve": "basis", "nodeSpacing": 30, "rankSpacing": 40, "padding": 10}}}%%
-flowchart LR
-    A[USSD] -->|raw input| C[ERPNext Core]
-    B[Web App] -->|REST API| C
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#0D9488", "primaryTextColor": "#ffffff", "primaryBorderColor": "#0F766E", "lineColor": "#6B7280", "fontFamily": "ui-monospace, monospace", "fontSize": "13px"}}}%%
+flowchart TD
+    A[USSD] --> C[ERPNext Core]
+    B[Web App] --> C
     C --> D{on_submit}
-    D -->|SDK| E[Stellar\nMint RECO]
-    D -->|API| F[M-Pesa\nB2C payout]
-    D -->|SQL| G[MariaDB]
+    D --> E[Stellar\nMint RECO]
+    D --> F[M-Pesa\nB2C Payment]
+    D --> G[MariaDB]
     E --> G
     F --> G
 ```
@@ -76,13 +76,13 @@ flowchart LR
 The platform account is the RECO issuer — no trustline required. Every mint carries the ERPNext transaction ID as a memo, creating a permanent two-way link between the on-chain record and the ERPNext audit log.
 
 ```mermaid
-%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#0D9488", "primaryTextColor": "#ffffff", "primaryBorderColor": "#0D9488", "lineColor": "#6B7280", "fontFamily": "ui-monospace, monospace", "fontSize": "12px"}, "flowchart": {"curve": "basis", "nodeSpacing": 30, "rankSpacing": 40, "padding": 10}}}%%
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#0D9488", "primaryTextColor": "#ffffff", "primaryBorderColor": "#0F766E", "lineColor": "#6B7280", "fontFamily": "ui-monospace, monospace", "fontSize": "13px"}}}%%
 flowchart TD
-    A[mint_reco_token\nweight_kg · tx_id] --> B[payment op\nRECO = weight_kg]
-    B --> C[memo: ERPNext TX ID]
-    C --> D[sign · submit to Horizon]
-    D -->|HTTP 200| E[stellar_hash saved]
-    D -->|HTTP 400/504| F[logged to error_log]
+    A[weight_kg + tx_id] --> B[Build RECO payment op]
+    B --> C[Add ERPNext memo]
+    C --> D[Sign and submit]
+    D -->|Success| E[Save stellar_hash]
+    D -->|Failure| F[Log to error_log]
 ```
 
 **Core function:** `matxchange/utils/stellar.py` → `mint_reco_token(collector_id, weight_kg, transaction_id)`
@@ -94,14 +94,14 @@ flowchart TD
 B2C disbursement fires automatically on Waste Transaction submit. The picker's phone number is fetched from their profile — no manual steps, no delays.
 
 ```mermaid
-%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#0D9488", "primaryTextColor": "#ffffff", "primaryBorderColor": "#0D9488", "lineColor": "#6B7280", "fontFamily": "ui-monospace, monospace", "fontSize": "12px"}, "flowchart": {"curve": "basis", "nodeSpacing": 30, "rankSpacing": 40, "padding": 10}}}%%
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#0D9488", "primaryTextColor": "#ffffff", "primaryBorderColor": "#0F766E", "lineColor": "#6B7280", "fontFamily": "ui-monospace, monospace", "fontSize": "13px"}}}%%
 flowchart TD
-    A[send_b2c_payment] --> B[fetch mpesa_number]
+    A[Waste Transaction submitted] --> B[Fetch picker phone]
     B --> C[Daraja B2C request]
-    C -->|HTTP 200| D[await callback]
-    C -->|HTTP 4xx/5xx| E[status: Failed]
-    D -->|ResultCode 0| F[status: Paid\nreceipt saved]
-    D -->|ResultCode 1032| G[status: Cancelled]
+    C -->|HTTP 200| D[Await callback]
+    C -->|HTTP error| E[Status: Failed]
+    D -->|ResultCode 0| F[Status: Paid]
+    D -->|ResultCode 1032| G[Status: Cancelled]
 ```
 
 **Core function:** `matxchange/utils/mpesa.py` → `send_b2c_payment(phone, amount, reference)`
@@ -129,10 +129,10 @@ Powered by Africa's Talking · `matxchange.co.ke/api/method/matxchange.utils.uss
 ## RECO Token
 
 ```mermaid
-%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#0D9488", "primaryTextColor": "#ffffff", "primaryBorderColor": "#0D9488", "lineColor": "#6B7280", "fontFamily": "ui-monospace, monospace", "fontSize": "12px"}, "flowchart": {"curve": "basis", "nodeSpacing": 30, "rankSpacing": 40, "padding": 10}}}%%
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#0D9488", "primaryTextColor": "#ffffff", "primaryBorderColor": "#0F766E", "lineColor": "#6B7280", "fontFamily": "ui-monospace, monospace", "fontSize": "13px"}}}%%
 flowchart TD
-    A[Phase 1 — Now\n1 RECO per kg at collection] --> B[Phase 2 — Month 6\nProducers buy RECO\nEPR compliance via NEMA]
-    B --> C[Phase 3 — Month 12\nRECO into carbon credits\nKCR · Verra · Gold Standard]
+    A[Phase 1 — Now\n1 RECO minted per kg collected] --> B[Phase 2 — Month 6\nProducers retire RECO for EPR compliance]
+    B --> C[Phase 3 — Month 12\nRECO bundled into carbon credits\nVerra · Gold Standard · KCR]
 ```
 
 ---
