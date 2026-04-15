@@ -1,0 +1,154 @@
+[
+ {
+  "add_total_row": 0,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "No",
+  "javascript": null,
+  "json": "{}",
+  "letter_head": "Company Letterhead - Grey",
+  "modified": "2026-04-12 17:01:43.590618",
+  "module": "Matxchange",
+  "name": "Waste Collection Summary",
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Waste Transaction",
+  "reference_report": null,
+  "report_name": "Waste Collection Summary",
+  "report_script": null,
+  "report_type": "Report Builder",
+  "roles": [
+   {
+    "role": "System Manager"
+   },
+   {
+    "role": "Collector"
+   },
+   {
+    "role": "Regulator"
+   },
+   {
+    "role": "Matxchange Admin"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 0,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "No",
+  "javascript": null,
+  "json": "{}",
+  "letter_head": "Company Letterhead - Grey",
+  "modified": "2026-04-12 17:03:33.582810",
+  "module": "Matxchange",
+  "name": "Picker Earnings Report",
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Waste Transaction",
+  "reference_report": null,
+  "report_name": "Picker Earnings Report",
+  "report_script": null,
+  "report_type": "Report Builder",
+  "roles": [
+   {
+    "role": "System Manager"
+   },
+   {
+    "role": "Picker"
+   },
+   {
+    "role": "Collector"
+   },
+   {
+    "role": "Matxchange Admin"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 0,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "No",
+  "javascript": null,
+  "json": "{}",
+  "letter_head": "Company Letterhead - Grey",
+  "modified": "2026-04-12 17:04:11.099020",
+  "module": "Matxchange",
+  "name": "EPR Compliance Report",
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "EPR Certificate",
+  "reference_report": null,
+  "report_name": "EPR Compliance Report",
+  "report_script": null,
+  "report_type": "Report Builder",
+  "roles": [
+   {
+    "role": "System Manager"
+   },
+   {
+    "role": "Matxchange Admin"
+   },
+   {
+    "role": "Regulator"
+   },
+   {
+    "role": "Producer"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 0,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "No",
+  "javascript": null,
+  "json": "{}",
+  "letter_head": "Company Letterhead - Grey",
+  "modified": "2026-04-12 17:04:42.824844",
+  "module": "Matxchange",
+  "name": "Impact Summary",
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Impact Record",
+  "reference_report": null,
+  "report_name": "Impact Summary",
+  "report_script": null,
+  "report_type": "Report Builder",
+  "roles": [
+   {
+    "role": "System Manager"
+   },
+   {
+    "role": "Regulator"
+   },
+   {
+    "role": "County Officer"
+   },
+   {
+    "role": "Matxchange Admin"
+   }
+  ],
+  "timeout": 0
+ }
+]

@@ -255,3 +255,16 @@ app_license = "mit"
 override_whitelisted_methods = {
     "matxchange.utils.ussd.handler": "matxchange.utils.ussd.handler"
 }
+
+fixtures = [
+    {"dt": "DocType", "filters": [["module", "=", "Matxchange"]]},
+    {"dt": "Custom Field", "filters": [["module", "=", "Matxchange"]]},
+    {"dt": "Print Format", "filters": [["module", "=", "Matxchange"]]},
+    {"dt": "Report", "filters": [["module", "=", "Matxchange"]]},
+    {"dt": "Dashboard", "filters": [["module", "=", "Matxchange"]]},
+    {"dt": "Dashboard Chart", "filters": [["module", "=", "Matxchange"]]},
+    {"dt": "Notification", "filters": [["module", "=", "Matxchange"]]},
+    {"dt": "Number Card", "filters": [["module", "=", "Matxchange"]]},
+    {"dt": "Email Template", "filters": [["name", "in", ["welcome-matxchange", "payment-confirmed", "transaction-submitted"]]]},
+    {"dt": "Workspace", "filters": [["name", "in", ["MatXchange"]]]},
+]
