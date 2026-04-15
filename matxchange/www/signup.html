@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MatXchange — Sign Up</title>
+<title>MatXchange - Sign Up</title>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 body{font-family:InterVariable,Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:#F0F0EC;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 1.5rem;font-size:14px}
@@ -16,15 +16,25 @@ body{font-family:InterVariable,Inter,-apple-system,BlinkMacSystemFont,sans-serif
 .msg.error{background:#FEF2F2;color:#DC2626;border:1px solid #FECACA}
 .msg.success{background:#F0FDF4;color:#16A34A;border:1px solid #BBF7D0}
 .field{margin-bottom:0.65rem}
+.field-hint{font-size:11px;color:#999;margin-top:4px;line-height:1.4}
+.field label{display:block;font-size:11px;font-weight:500;color:#666;margin-bottom:4px;letter-spacing:0.02em}
 .field input,.field select{width:100%;padding:8px 11px;border:1px solid #E0E0DC;border-radius:6px;font-size:13px;font-family:inherit;color:#111;background:#fff;outline:none;transition:border-color 0.15s;-webkit-appearance:none;appearance:none}
 .field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center;padding-right:30px;cursor:pointer}
 .field input:focus,.field select:focus{border-color:#C8932A;box-shadow:0 0 0 3px rgba(200,147,42,0.08)}
 .field input::placeholder{color:#C0C0BB}
-.btn-primary{width:100%;padding:9px;background:#111;color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;transition:opacity 0.15s;margin-top:0.25rem;margin-bottom:0.9rem}
+.field input.optional{border-style:dashed}
+.or-divider{text-align:center;font-size:11px;color:#C0C0BB;margin:0.25rem 0;position:relative}
+.pw-rules{background:#F9F9F7;border-radius:6px;padding:8px 12px;margin-bottom:0.65rem;font-size:11px;color:#666;line-height:1.8}
+.pw-rules strong{color:#111;display:block;margin-bottom:2px;font-size:11px}
+.pw-rule{display:flex;align-items:center;gap:6px}
+.pw-rule .dot{width:5px;height:5px;border-radius:50%;background:#DDD;flex-shrink:0;transition:background 0.2s}
+.pw-rule.met .dot{background:#16A34A}
+.pw-rule.met{color:#16A34A}
+.btn-primary{width:100%;padding:9px;background:#111;color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;transition:opacity 0.15s;margin-top:0.5rem;margin-bottom:0.9rem}
 .btn-primary:hover{opacity:0.85}
 .btn-primary:disabled{opacity:0.4;cursor:not-allowed}
 .divider{text-align:center;font-size:11px;color:#C0C0BB;margin:0 0 0.9rem;position:relative}
-.divider::before,.divider::after{content:'';position:absolute;top:50%;width:44%;height:1px;background:#E8E8E4}
+.divider::before,.divider::after{content:"";position:absolute;top:50%;width:44%;height:1px;background:#E8E8E4}
 .divider::before{left:0}.divider::after{right:0}
 .alt-btn{width:100%;padding:8px 11px;background:#fff;color:#444;border:1px solid #E0E0DC;border-radius:6px;font-size:13px;font-family:inherit;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;transition:border-color 0.15s;margin-bottom:0.5rem}
 .alt-btn:hover{border-color:#999}
@@ -39,22 +49,42 @@ body{font-family:InterVariable,Inter,-apple-system,BlinkMacSystemFont,sans-serif
 </style>
 </head>
 <body>
-
 <div class="logo-area">
   <img src="/files/logo.png" alt="MatXchange">
   <p>The operating system for Africa's circular economy</p>
 </div>
-
 <div class="card">
   <div class="card-title">Create your account</div>
   <div id="msg" class="msg"></div>
-
   <div id="email-section">
-    <div class="field"><input type="text" id="full-name" placeholder="Full name"></div>
-    <div class="field"><input type="email" id="email" placeholder="Email address"></div>
-    <div class="field"><input type="tel" id="phone-signup" placeholder="Phone (+254...)"></div>
-    <div class="field"><input type="password" id="password" placeholder="Password (min 8 characters)"></div>
     <div class="field">
+      <label>Full name</label>
+      <input type="text" id="full-name" placeholder="John Kamau">
+    </div>
+    <div class="field">
+      <label>Email address <span style="color:#C8932A">*</span></label>
+      <input type="email" id="email" placeholder="john@example.com" oninput="checkRules()">
+    </div>
+    <div class="or-divider">and / or</div>
+    <div class="field">
+      <label>Phone number <span style="color:#C8932A">*</span></label>
+      <input type="tel" id="phone-signup" placeholder="+254712345678" class="optional">
+      <div class="field-hint">At least one of email or phone is required</div>
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <input type="password" id="password" placeholder="Create a strong password" oninput="checkRules()">
+    </div>
+    <div class="pw-rules">
+      <strong>Password must have:</strong>
+      <div class="pw-rule" id="rule-len"><span class="dot"></span> At least 8 characters</div>
+      <div class="pw-rule" id="rule-upper"><span class="dot"></span> One uppercase letter</div>
+      <div class="pw-rule" id="rule-lower"><span class="dot"></span> One lowercase letter</div>
+      <div class="pw-rule" id="rule-num"><span class="dot"></span> One number</div>
+      <div class="pw-rule" id="rule-special"><span class="dot"></span> One special character (!@#$...)</div>
+    </div>
+    <div class="field">
+      <label>Role</label>
       <select id="role">
         <option value="" disabled selected>Select your role</option>
         <option value="Picker">Picker</option>
@@ -65,34 +95,24 @@ body{font-family:InterVariable,Inter,-apple-system,BlinkMacSystemFont,sans-serif
         <option value="Fleet Manager">Fleet Manager</option>
       </select>
     </div>
-
     <button class="btn-primary" id="signup-btn" onclick="doSignup()">Create account</button>
-
     <div class="divider">or</div>
-
     <a href="/api/method/frappe.integrations.oauth2_logins.login_via_google" class="alt-btn">
-      <svg width="15" height="15" viewBox="0 0 18 18">
-        <path fill="#4285F4" d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.48-1.6 2.04v2.01h2.6a7.8 7.8 0 0 0 2.38-5.88c0-.57-.05-.66-.15-1.18z"/>
-        <path fill="#34A853" d="M8.98 17c2.16 0 3.97-.72 5.3-1.94l-2.6-2a4.8 4.8 0 0 1-7.18-2.54H1.83v2.07A8 8 0 0 0 8.98 17z"/>
-        <path fill="#FBBC05" d="M4.5 10.52a4.8 4.8 0 0 1 0-3.04V5.41H1.83a8 8 0 0 0 0 7.18z"/>
-        <path fill="#EA4335" d="M8.98 4.18c1.17 0 2.23.4 3.06 1.2l2.3-2.3A8 8 0 0 0 1.83 5.4L4.5 7.49a4.77 4.77 0 0 1 4.48-3.3z"/>
-      </svg>
+      <svg width="15" height="15" viewBox="0 0 18 18"><path fill="#4285F4" d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.48-1.6 2.04v2.01h2.6a7.8 7.8 0 0 0 2.38-5.88c0-.57-.05-.66-.15-1.18z"/><path fill="#34A853" d="M8.98 17c2.16 0 3.97-.72 5.3-1.94l-2.6-2a4.8 4.8 0 0 1-7.18-2.54H1.83v2.07A8 8 0 0 0 8.98 17z"/><path fill="#FBBC05" d="M4.5 10.52a4.8 4.8 0 0 1 0-3.04V5.41H1.83a8 8 0 0 0 0 7.18z"/><path fill="#EA4335" d="M8.98 4.18c1.17 0 2.23.4 3.06 1.2l2.3-2.3A8 8 0 0 0 1.83 5.4L4.5 7.49a4.77 4.77 0 0 1 4.48-3.3z"/></svg>
       Continue with Google
     </a>
-
     <button class="alt-btn" onclick="showOTP()">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="5" y="2" width="14" height="20" rx="2"/>
-        <line x1="12" y1="18" x2="12.01" y2="18"/>
-      </svg>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
       Sign up with phone number
     </button>
   </div>
-
   <div class="otp-section" id="otp-section">
-    <button class="back-link" onclick="showEmail()">← Back</button>
+    <button class="back-link" onclick="showEmail()">Back</button>
     <div id="otp-step-1">
-      <div class="field"><input type="tel" id="otp-phone" placeholder="Phone number (+254...)"></div>
+      <div class="field">
+        <label>Phone number</label>
+        <input type="tel" id="otp-phone" placeholder="+254712345678">
+      </div>
       <button class="btn-primary" onclick="sendOTP()">Send verification code</button>
     </div>
     <div id="otp-step-2" style="display:none">
@@ -103,58 +123,63 @@ body{font-family:InterVariable,Inter,-apple-system,BlinkMacSystemFont,sans-serif
     </div>
   </div>
 </div>
-
 <div class="footer">Already have an account? <a href="/login">Sign in</a></div>
-
 <script>
-function showMsg(type,text){const el=document.getElementById('msg');el.className='msg '+type;el.textContent=text;el.style.display='block'}
-function hideMsg(){document.getElementById('msg').style.display='none'}
-function showOTP(){document.getElementById('email-section').style.display='none';document.getElementById('otp-section').classList.add('active');hideMsg()}
-function showEmail(){document.getElementById('email-section').style.display='block';document.getElementById('otp-section').classList.remove('active');hideMsg()}
-
+function checkRules(){
+  const pw=document.getElementById("password").value;
+  const set=(id,ok)=>{document.getElementById(id).classList.toggle("met",ok)};
+  set("rule-len",pw.length>=8);
+  set("rule-upper",/[A-Z]/.test(pw));
+  set("rule-lower",/[a-z]/.test(pw));
+  set("rule-num",/[0-9]/.test(pw));
+  set("rule-special",/[^A-Za-z0-9]/.test(pw));
+}
+function showMsg(t,m){const e=document.getElementById("msg");e.className="msg "+t;e.textContent=m;e.style.display="block"}
+function hideMsg(){document.getElementById("msg").style.display="none"}
+function showOTP(){document.getElementById("email-section").style.display="none";document.getElementById("otp-section").classList.add("active");hideMsg()}
+function showEmail(){document.getElementById("email-section").style.display="block";document.getElementById("otp-section").classList.remove("active");hideMsg()}
 async function doSignup(){
-  const name=document.getElementById('full-name').value.trim();
-  const email=document.getElementById('email').value.trim();
-  const phone=document.getElementById('phone-signup').value.trim();
-  const password=document.getElementById('password').value;
-  const role=document.getElementById('role').value;
-  const btn=document.getElementById('signup-btn');
-  if(!name||!email||!password||!role){showMsg('error','Please fill in all fields and select your role.');return}
-  if(password.length<8){showMsg('error','Password must be at least 8 characters.');return}
-  btn.disabled=true;btn.textContent='Creating account...';
+  const name=document.getElementById("full-name").value.trim();
+  const email=document.getElementById("email").value.trim();
+  const phone=document.getElementById("phone-signup").value.trim();
+  const password=document.getElementById("password").value;
+  const role=document.getElementById("role").value;
+  const btn=document.getElementById("signup-btn");
+  if(!name){showMsg("error","Please enter your full name.");return}
+  if(!email&&!phone){showMsg("error","Please enter your email address or phone number.");return}
+  if(!password||password.length<8){showMsg("error","Password must be at least 8 characters.");return}
+  if(!role){showMsg("error","Please select your role.");return}
+  btn.disabled=true;btn.textContent="Creating account...";
   try{
-    const res=await fetch('/api/method/matxchange.api.signup',{method:'POST',headers:{'Content-Type':'application/json','X-Frappe-CSRF-Token':'fetch'},body:JSON.stringify({full_name:name,email,phone,password,role})});
+    const res=await fetch("/api/method/matxchange.utils.api.signup",{method:"POST",headers:{"Content-Type":"application/json","X-Frappe-CSRF-Token":"fetch"},body:JSON.stringify({full_name:name,email,phone,password,role})});
     const data=await res.json();
-    if(data.message&&data.message.status==='success'){showMsg('success','Account created. Redirecting to login...');setTimeout(()=>window.location.href='/login',2000)}
-    else{showMsg('error',data.message?.error||'Signup failed. Please try again.');btn.disabled=false;btn.textContent='Create account'}
-  }catch(e){showMsg('error','Something went wrong. Please try again.');btn.disabled=false;btn.textContent='Create account'}
+    if(data.message&&data.message.status==="success"){showMsg("success","Account created. Redirecting to login...");setTimeout(()=>window.location.href="/login",2000)}
+    else{showMsg("error",data.message?.error||"Signup failed. Please try again.");btn.disabled=false;btn.textContent="Create account"}
+  }catch(e){showMsg("error","Something went wrong. Please try again.");btn.disabled=false;btn.textContent="Create account"}
 }
-
 async function sendOTP(){
-  const phone=document.getElementById('otp-phone').value.trim();
-  if(!phone){showMsg('error','Enter your phone number.');return}
-  showMsg('success','Sending code...');
+  const phone=document.getElementById("otp-phone").value.trim();
+  if(!phone){showMsg("error","Enter your phone number.");return}
+  showMsg("success","Sending code...");
   try{
-    const res=await fetch('/api/method/matxchange.api.send_otp',{method:'POST',headers:{'Content-Type':'application/json','X-Frappe-CSRF-Token':'fetch'},body:JSON.stringify({phone})});
+    const res=await fetch("/api/method/matxchange.utils.api.send_otp",{method:"POST",headers:{"Content-Type":"application/json","X-Frappe-CSRF-Token":"fetch"},body:JSON.stringify({phone})});
     const data=await res.json();
-    if(data.message&&data.message.status==='success'){document.getElementById('otp-step-1').style.display='none';document.getElementById('otp-step-2').style.display='block';showMsg('success','Code sent. Check your phone.')}
-    else{showMsg('error','Failed to send code. Try again.')}
-  }catch(e){showMsg('error','Something went wrong.')}
+    if(data.message&&data.message.status==="success"){document.getElementById("otp-step-1").style.display="none";document.getElementById("otp-step-2").style.display="block";showMsg("success","Code sent.")}
+    else{showMsg("error","Failed to send code.")}
+  }catch(e){showMsg("error","Something went wrong.")}
 }
-
 async function verifyOTP(){
-  const phone=document.getElementById('otp-phone').value.trim();
-  const otp=document.getElementById('otp-code').value.trim();
-  if(otp.length!==6){showMsg('error','Enter the 6-digit code.');return}
+  const phone=document.getElementById("otp-phone").value.trim();
+  const otp=document.getElementById("otp-code").value.trim();
+  if(otp.length!==6){showMsg("error","Enter the 6-digit code.");return}
   try{
-    const res=await fetch('/api/method/matxchange.api.verify_otp',{method:'POST',headers:{'Content-Type':'application/json','X-Frappe-CSRF-Token':'fetch'},body:JSON.stringify({phone,otp})});
+    const res=await fetch("/api/method/matxchange.utils.api.verify_otp",{method:"POST",headers:{"Content-Type":"application/json","X-Frappe-CSRF-Token":"fetch"},body:JSON.stringify({phone,otp})});
     const data=await res.json();
-    if(data.message&&data.message.status==='success'){showMsg('success','Verified. Redirecting...');setTimeout(()=>window.location.href='/desk',1500)}
-    else{showMsg('error',data.message?.error||'Invalid code. Try again.')}
-  }catch(e){showMsg('error','Something went wrong.')}
+    if(data.message&&data.message.status==="success"){showMsg("success","Verified. Redirecting...");setTimeout(()=>window.location.href="/desk",1500)}
+    else{showMsg("error",data.message?.error||"Invalid code.")}
+  }catch(e){showMsg("error","Something went wrong.")}
 }
-
-function resetOTP(){document.getElementById('otp-step-1').style.display='block';document.getElementById('otp-step-2').style.display='none';document.getElementById('otp-code').value='';hideMsg()}
+function resetOTP(){document.getElementById("otp-step-1").style.display="block";document.getElementById("otp-step-2").style.display="none";document.getElementById("otp-code").value="";hideMsg()}
 </script>
 </body>
 </html>
