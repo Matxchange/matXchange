@@ -10,7 +10,8 @@ def handler(**kwargs):
     parts = text.split("*") if text else []
     level = len(parts) if text else 0
     result = build_response(session_id, phone, parts, level)
-    frappe.response["message"] = result
+    frappe.local.response["type"] = "txt"
+    frappe.local.response["message"] = result
     return result
 
 
@@ -61,13 +62,7 @@ def get_earnings(phone):
 
 
 def record_waste(phone, category_choice, weight):
-    categories = {
-        "1": "Plastic PET",
-        "2": "Plastic HDPE",
-        "3": "E-Waste",
-        "4": "Cardboard",
-        "5": "Metal Scrap"
-    }
+    categories = {"1": "Plastic PET", "2": "Plastic HDPE", "3": "E-Waste", "4": "Cardboard", "5": "Metal Scrap"}
     category = categories.get(category_choice, "Unknown")
     return "END Waste recorded!\nCategory: " + category + "\nWeight: " + weight + " KG\nPayment coming shortly."
 
