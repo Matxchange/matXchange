@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # MatXchange
 
 MatXchange is infrastructure for the circular economy. We digitize the informal waste sector — connecting pickers, collectors, recyclers, and producers on a single verified ledger, with automatic mobile money payments and every kilogram permanently anchored to the Stellar blockchain.
@@ -221,3 +222,6 @@ The MatXchange name, RECO token concept, and circular economy operating system d
 [matxchange.co.ke](https://matxchange.co.ke) &nbsp;·&nbsp; [samuel@matxchange.co.ke](mailto:samuel@matxchange.co.ke)
 
 </div>
+
+# matXchange
+
