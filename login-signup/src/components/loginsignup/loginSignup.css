@@ -10,6 +10,13 @@
   gap: 24px;
 }
 
+/* Logo */
+.logo {
+  width: 120px;
+  margin: 0 auto;
+  display: block;
+}
+
 /* Header */
 .header {
   display: flex;

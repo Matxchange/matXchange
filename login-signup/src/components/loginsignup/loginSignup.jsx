@@ -3,6 +3,7 @@ import './loginSignup.css'
 import user_icon from '../assets/user_icon.png'
 import email_icon from '../assets/email_icon.png'
 import password_icon from '../assets/password_icon.png'
+import mx_logo from '../assets/mx-logo.png'
 
 const EyeIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
@@ -27,6 +28,7 @@ export const LoginSignup = () => {
 
   return (
     <div className="container">
+      <img src={mx_logo} alt="MatXchange Logo" className="logo" />
       <div className="header">
         <div className="text">{action === 'signup' ? 'Sign Up' : 'Login'}</div>
         <div className="underline"></div>
