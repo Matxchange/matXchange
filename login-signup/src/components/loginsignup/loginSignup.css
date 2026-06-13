@@ -67,6 +67,22 @@
   color: #333;
 }
 
+/* Eye toggle */
+.eye-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #888;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.eye-toggle:hover {
+  color: #3c009d;
+}
+
 /* Forgot password */
 .forgot-password {
   text-align: right;
