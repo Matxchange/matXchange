@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # MatXchange
 
 MatXchange is infrastructure for the circular economy. We digitize the informal waste sector — connecting pickers, collectors, recyclers, and producers on a single verified ledger, with automatic mobile money payments and every kilogram permanently anchored to the Stellar blockchain.
