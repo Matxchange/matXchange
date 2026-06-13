@@ -1,12 +1,12 @@
 .container {
   display: flex;
   flex-direction: column;
-  margin: auto;
+  width: 100%;
+  max-width: 420px;
   background: #ffffff;
-  padding: 40px;
+  padding: clamp(24px, 6vw, 48px);
   border-radius: 12px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
-  width: 380px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
   gap: 24px;
 }
 
@@ -27,7 +27,7 @@
 
 .header .text {
   color: grey;
-  font-size: 40px;
+  font-size: clamp(28px, 6vw, 40px);
   font-weight: 700;
 }
 
@@ -121,7 +121,7 @@
   border-radius: 50px;
   background: #995d03e0;
   color: #fff;
-  font-size: 18px;
+  font-size: clamp(15px, 3vw, 18px);
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s ease;
