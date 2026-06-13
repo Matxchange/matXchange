@@ -20,7 +20,7 @@
 }
 
 .header .text {
-  color: #3c009d;
+  color: grey;
   font-size: 40px;
   font-weight: 700;
 }
@@ -28,7 +28,7 @@
 .header .underline {
   width: 61px;
   height: 6px;
-  background: #3c009d;
+  background: #9d4c00ee;
   border-radius: 9px;
 }
 
@@ -46,7 +46,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  background: #eaeaea;
+  background: #cc6f063b;
   border-radius: 8px;
   padding: 0 16px;
   height: 60px;
@@ -80,7 +80,7 @@
 }
 
 .eye-toggle:hover {
-  color: #3c009d;
+  color: #9d4c00ef;
 }
 
 /* Forgot password */
@@ -91,7 +91,7 @@
 .forgot-password button {
   background: none;
   border: none;
-  color: #3c009d;
+  color: #9d4c00de;
   font-size: 14px;
   cursor: pointer;
   padding: 0;
@@ -113,7 +113,7 @@
   height: 52px;
   border: none;
   border-radius: 50px;
-  background: #3c009d;
+  background: #995d03e0;
   color: #fff;
   font-size: 18px;
   font-weight: 600;
