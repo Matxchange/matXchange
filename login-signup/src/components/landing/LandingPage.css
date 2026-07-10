@@ -79,7 +79,7 @@
   transition: background 0.2s;
 }
 
-.btn-login:hover { background: #da9040; }
+.btn-login:hover { background: #724414; }
 
 .nav-menu-btn {
   display: none;
@@ -530,6 +530,76 @@
   font-size: 12px;
   color: var(--muted);
 }
+
+/* ── Scroll progress bar ──────────────────────────────────────────────────── */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  background: var(--orange);
+  z-index: 200;
+  transition: width 0.08s linear;
+  pointer-events: none;
+}
+
+/* ── Scroll-reveal animations ─────────────────────────────────────────────── */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.animate-on-scroll.in-view {
+  opacity: 1;
+  transform: none;
+}
+.animate-on-scroll:nth-child(1) { transition-delay: 0s; }
+.animate-on-scroll:nth-child(2) { transition-delay: 0.1s; }
+.animate-on-scroll:nth-child(3) { transition-delay: 0.18s; }
+.animate-on-scroll:nth-child(4) { transition-delay: 0.26s; }
+
+/* ── Orbit ring animation ─────────────────────────────────────────────────── */
+@keyframes rotateOrbit {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+.orbit-ring {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: rotateOrbit 38s linear infinite;
+}
+.cycle-logo { filter: drop-shadow(0 0 10px rgba(201,130,58,0.18)); }
+.node-icon  { transition: box-shadow 0.2s, border-color 0.2s; }
+.node-icon:hover {
+  border-color: var(--orange);
+  box-shadow: 0 0 14px rgba(201,130,58,0.28);
+}
+
+/* ── Active nav link ──────────────────────────────────────────────────────── */
+.nav-links button.active {
+  color: var(--white);
+  background: rgba(201,130,58,0.10);
+}
+
+/* ── Stat card hover ──────────────────────────────────────────────────────── */
+.stat-card { transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s; }
+.stat-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--orange-border);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.3);
+}
+
+/* ── CTA glow + note ──────────────────────────────────────────────────────── */
+.cta-section { position: relative; overflow: hidden; }
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 480px; height: 480px;
+  background: radial-gradient(circle, rgba(201,130,58,0.055) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-note { font-size: 12px; color: var(--muted); letter-spacing: 0.02em; }
 
 /* ── Responsive ───────────────────────────────────────────────────────── */
 @media (max-width: 1060px) {

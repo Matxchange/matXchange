@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import './LandingPage.css'
 import mx_logo from '../assets/mx-logo.png'
@@ -93,6 +93,39 @@ const CloseIcon = () => (
   </svg>
 )
 
+// ── Count-up hook ──────────────────────────────────────────────────────────
+const useCountUp = (rawValue, active, duration = 1800) => {
+  const [count, setCount] = useState(0)
+  const num = parseInt(rawValue.replace(/[,+]/g, ''))
+  useEffect(() => {
+    if (!active) return
+    let cur = 0
+    const step = num / (duration / 16)
+    const timer = setInterval(() => {
+      cur = Math.min(cur + step, num)
+      setCount(Math.floor(cur))
+      if (cur >= num) clearInterval(timer)
+    }, 16)
+    return () => clearInterval(timer)
+  }, [active, num, duration])
+  return count
+}
+
+// ── Stat card with animated counter ───────────────────────────────────────
+const StatCard = ({ icon, value, label, sub, inView }) => {
+  const count = useCountUp(value, inView)
+  const hasPlus = value.includes('+')
+  const display = inView ? count.toLocaleString() + (hasPlus ? '+' : '') : '0'
+  return (
+    <div className="stat-card animate-on-scroll">
+      <div className="stat-icon">{icon}</div>
+      <p className="stat-value">{display}</p>
+      <p className="stat-label">{label}</p>
+      <p className="stat-sub">{sub}</p>
+    </div>
+  )
+}
+
 // ── Cycle Diagram ──────────────────────────────────────────────────────────
 const CycleDiagram = () => {
   const dots = [
@@ -114,7 +147,7 @@ const CycleDiagram = () => {
             <stop offset="100%" stopColor="#0e1a0b"/>
           </radialGradient>
         </defs>
-        <circle cx="220" cy="220" r="155" stroke="#4a7835" strokeWidth="1.5" strokeDasharray="5 6"/>
+        <circle className="orbit-ring" cx="220" cy="220" r="155" stroke="#4a7835" strokeWidth="1.5" strokeDasharray="5 6"/>
         <circle cx="220" cy="220" r="108" fill="url(#ig)" stroke="#2a3a20" strokeWidth="1"/>
         {dots.map(([x,y],i) => <circle key={i} cx={x} cy={y} r="2" fill="#6aaa50" opacity="0.45"/>)}
         <path d="M252 68A155 155 0 0 1 370 248" stroke="#c9823a" strokeWidth="1.8" markerEnd="url(#arr)"/>
@@ -126,30 +159,81 @@ const CycleDiagram = () => {
       <div className="cycle-node node-top">
         <div className="node-icon"><QRIcon size={18}/></div>
         <p className="node-title">TRACE</p>
-        <p className="node-desc">Track waste<br/>from source</p>
       </div>
       <div className="cycle-node node-right">
         <div className="node-icon"><RecycleIcon size={18}/></div>
         <p className="node-title">VERIFY</p>
-        <p className="node-desc">Verify data<br/>and assets</p>
       </div>
       <div className="cycle-node node-bottom">
         <div className="node-icon"><ChartIcon size={18}/></div>
         <p className="node-title">MEASURE</p>
-        <p className="node-desc">Measure impact<br/>and performance</p>
       </div>
       <div className="cycle-node node-left">
         <div className="node-icon"><LeafIcon size={18}/></div>
         <p className="node-title">CONNECT</p>
-        <p className="node-desc">Connect the<br/>waste economy</p>
       </div>
     </div>
   )
 }
 
-// ── Main Component ─────────────────────────────────────────────────────────
+// ── Nav items ──────────────────────────────────────────────────────────────
+const navItems = [
+  { label: 'How It Works', section: 'how-it-works' },
+  { label: 'Solutions',    section: 'solutions' },
+  { label: 'QR Passports', section: 'qr' },
+  { label: 'About Us',     section: 'about' },
+]
+
+// ── Page ───────────────────────────────────────────────────────────────────
 const LandingPage = () => {
-  const [menuOpen, setMenuOpen] = useState(false)
+  const [menuOpen, setMenuOpen]       = useState(false)
+  const [activeSection, setActiveSection] = useState('home')
+  const [scrollPct, setScrollPct]     = useState(0)
+  const [statsInView, setStatsInView] = useState(false)
+  const statsRef = useRef(null)
+
+  // Scroll progress bar
+  useEffect(() => {
+    const onScroll = () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight
+      setScrollPct(h > 0 ? (window.scrollY / h) * 100 : 0)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  // Active section tracking
+  useEffect(() => {
+    const ids = ['home', 'solutions', 'how-it-works', 'qr', 'about']
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) setActiveSection(e.target.id) })
+    }, { threshold: 0.35 })
+    ids.forEach(id => { const el = document.getElementById(id); if (el) obs.observe(el) })
+    return () => obs.disconnect()
+  }, [])
+
+  // Scroll-reveal for cards / section headers
+  useEffect(() => {
+    const els = document.querySelectorAll('.animate-on-scroll')
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in-view'); obs.unobserve(e.target) }
+      })
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' })
+    els.forEach(el => obs.observe(el))
+    return () => obs.disconnect()
+  }, [])
+
+  // Stats counter trigger
+  useEffect(() => {
+    const el = statsRef.current
+    if (!el) return
+    const obs = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { setStatsInView(true); obs.disconnect() }
+    }, { threshold: 0.25 })
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
 
   const scrollTo = (id) => {
     setMenuOpen(false)
@@ -164,10 +248,10 @@ const LandingPage = () => {
   ]
 
   const stats = [
-    { icon: <LeafIcon size={30}/>,   value: '15,428+', label: 'Active Users',           sub: 'Collectors, aggregators & recyclers onboarded' },
-    { icon: <RecycleIcon size={30}/>,value: '32,650+', label: 'Tons of Waste Tracked',  sub: 'Digitally verified and traceable across the system' },
-    { icon: <ChartIcon size={30}/>,  value: '450+',    label: 'Partner Organizations',  sub: 'Working together for a cleaner, circular future' },
-    { icon: <GlobeIcon size={30}/>,  value: '23',      label: 'Counties Reached',       sub: 'Building a nationwide circular economy network' },
+    { icon: <LeafIcon size={30}/>,   value: '15428+', label: 'Active Users',          sub: 'Collectors, aggregators & recyclers onboarded' },
+    { icon: <RecycleIcon size={30}/>,value: '32650+', label: 'Tons of Waste Tracked', sub: 'Digitally verified and traceable across the system' },
+    { icon: <ChartIcon size={30}/>,  value: '450+',   label: 'Partner Organizations', sub: 'Working together for a cleaner, circular future' },
+    { icon: <GlobeIcon size={30}/>,  value: '23',     label: 'Counties Reached',      sub: 'Building a nationwide circular economy network' },
   ]
 
   const steps = [
@@ -180,16 +264,23 @@ const LandingPage = () => {
   return (
     <div className="landing">
 
+      {/* Scroll progress */}
+      <div className="scroll-progress" style={{ width: `${scrollPct}%` }} />
+
       {/* Navbar */}
       <nav className="navbar">
         <div className="nav-inner">
           <img src={mx_logo} alt="MatXchange" className="nav-logo" onClick={() => scrollTo('home')}/>
           <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
-            <button onClick={() => scrollTo('how-it-works')}>Impact Estimator</button>
-            <button onClick={() => scrollTo('solutions')}>Solutions</button>
-            <button onClick={() => scrollTo('how-it-works')}>Verification</button>
-            <button onClick={() => scrollTo('qr')}>Resources</button>
-            <button onClick={() => scrollTo('about')}>About Us</button>
+            {navItems.map(({ label, section }) => (
+              <button
+                key={section}
+                className={activeSection === section ? 'active' : ''}
+                onClick={() => scrollTo(section)}
+              >
+                {label}
+              </button>
+            ))}
           </div>
           <div className="nav-actions">
             <Link to="/login" className="btn-login">Log In</Link>
@@ -239,7 +330,7 @@ const LandingPage = () => {
       <section id="solutions" className="section stakeholders-section">
         <div className="section-inner stake-grid">
           {stakeholders.map((s,i) => (
-            <div className="stake-card" key={i}>
+            <div className="stake-card animate-on-scroll" key={i}>
               <div className="stake-icon">{s.icon}</div>
               <h3>{s.title}</h3>
               <p>{s.desc}</p>
@@ -251,14 +342,9 @@ const LandingPage = () => {
 
       {/* Impact Stats */}
       <section className="section stats-section">
-        <div className="section-inner stats-grid">
+        <div className="section-inner stats-grid" ref={statsRef}>
           {stats.map((s,i) => (
-            <div className="stat-card" key={i}>
-              <div className="stat-icon">{s.icon}</div>
-              <p className="stat-value">{s.value}</p>
-              <p className="stat-label">{s.label}</p>
-              <p className="stat-sub">{s.sub}</p>
-            </div>
+            <StatCard key={i} {...s} inView={statsInView} />
           ))}
         </div>
       </section>
@@ -266,14 +352,14 @@ const LandingPage = () => {
       {/* How It Works */}
       <section id="how-it-works" className="section howitworks-section">
         <div className="section-inner">
-          <div className="section-header">
+          <div className="section-header animate-on-scroll">
             <p className="section-tag">HOW IT WORKS</p>
             <h2>From Waste to Verified Impact</h2>
             <p className="section-sub">A single, end-to-end digital workflow connecting every player in Kenya's waste economy.</p>
           </div>
           <div className="steps-grid">
             {steps.map((s,i) => (
-              <div className="step-card" key={i}>
+              <div className="step-card animate-on-scroll" key={i}>
                 <span className="step-num" style={{color:s.color}}>{s.num}</span>
                 <div className="step-icon" style={{color:s.color,background:`${s.color}18`}}>{s.icon}</div>
                 <h3 style={{color:s.color}}>{s.title}</h3>
@@ -287,7 +373,7 @@ const LandingPage = () => {
       {/* QR Code Passports */}
       <section id="qr" className="section qr-section">
         <div className="section-inner qr-inner">
-          <div className="qr-left">
+          <div className="qr-left animate-on-scroll">
             <p className="section-tag">PRODUCT PASSPORT</p>
             <h2>Every Product Tells Its Story</h2>
             <p className="qr-desc">
@@ -302,7 +388,7 @@ const LandingPage = () => {
             </ul>
             <p className="qr-tagline">Turning every upcycled product into a verifiable sustainability story.</p>
           </div>
-          <div className="qr-right">
+          <div className="qr-right animate-on-scroll">
             <div className="qr-card">
               <div className="qr-code-box">
                 <svg width="76" height="76" viewBox="0 0 24 24" fill="none" stroke="#c9823a" strokeWidth="1.4">
@@ -319,9 +405,9 @@ const LandingPage = () => {
               </div>
               <div className="qr-story">
                 {[
-                  { dot:'orange', label:'Collected',          val:'1.2 kg Plastic · Nairobi · 14 Jun 2026' },
-                  { dot:'green',  label:'Processed',          val:'EcoRecycle Kenya · Mechanical Recycling' },
-                  { dot:'orange', label:'Upcycled By',        val:'Galant Branding International' },
+                  { dot:'orange', label:'Collected',           val:'1.2 kg Plastic · Nairobi · 14 Jun 2026' },
+                  { dot:'green',  label:'Processed',           val:'EcoRecycle Kenya · Mechanical Recycling' },
+                  { dot:'orange', label:'Upcycled By',         val:'Galant Branding International' },
                   { dot:'green',  label:'Blockchain Verified', val:'1.2 RECO minted · Stellar Network' },
                 ].map((item,i,arr) => (
                   <React.Fragment key={i}>
@@ -344,18 +430,18 @@ const LandingPage = () => {
       {/* About Us */}
       <section id="about" className="section about-section">
         <div className="section-inner">
-          <div className="section-header">
+          <div className="section-header animate-on-scroll">
             <p className="section-tag">ABOUT US</p>
             <h2>Built for Kenya's Circular Economy</h2>
             <p className="section-sub">We exist to formalize, digitize, and verify Kenya's waste sector — creating a system where every kilogram counts.</p>
           </div>
           <div className="about-grid">
             {[
-              { color:'green',  icon:<LeafIcon size={22}/>,   title:'Our Mission',      body:'To create a transparent, inclusive system where every waste collector is recognized, every kilogram is counted, every payment is instant, and every impact is verified on the blockchain.' },
-              { color:'orange', icon:<GlobeIcon size={22}/>,  title:'The Problem We Solve', body:'Millions of informal waste pickers work daily with no formal records, no reliable payment, and no proof of impact. Recyclers lack supply chain visibility. MatXchange changes that.' },
-              { color:'green',  icon:<ChartIcon size={22}/>,  title:'Our Vision',       body:'A Kenya where every recycled product carries a verified story — from the hand that collected it to the shelf it sits on — and where circular economy data drives real investment and policy.' },
+              { color:'green',  icon:<LeafIcon size={22}/>,  title:'Our Mission',         body:'To create a transparent, inclusive system where every waste collector is recognized, every kilogram is counted, every payment is instant, and every impact is verified on the blockchain.' },
+              { color:'orange', icon:<GlobeIcon size={22}/>, title:'The Problem We Solve', body:'Millions of informal waste pickers work daily with no formal records, no reliable payment, and no proof of impact. Recyclers lack supply chain visibility. MatXchange changes that.' },
+              { color:'green',  icon:<ChartIcon size={22}/>, title:'Our Vision',           body:'A Kenya where every recycled product carries a verified story — from the hand that collected it to the shelf it sits on — and where circular economy data drives real investment and policy.' },
             ].map((c,i) => (
-              <div className="about-card" key={i}>
+              <div className="about-card animate-on-scroll" key={i}>
                 <div className={`about-icon ${c.color}`}>{c.icon}</div>
                 <h3>{c.title}</h3>
                 <p>{c.body}</p>
@@ -367,10 +453,11 @@ const LandingPage = () => {
 
       {/* CTA */}
       <section className="cta-section">
-        <div className="cta-inner">
+        <div className="cta-inner animate-on-scroll">
           <h2>Ready to join Kenya's circular economy?</h2>
           <p>Whether you're a waste collector, recycler, brand, or organization — there's a place for you on MatXchange.</p>
           <Link to="/login" className="btn-primary btn-large">Get Started <ArrowRight size={18}/></Link>
+          <span className="cta-note">Free to join · No credit card required</span>
         </div>
       </section>
 
