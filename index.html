@@ -31,13 +31,13 @@
   <!-- NAV -->
   <div style="position:sticky; top:0; z-index:30; padding:{{ navPad }} 4vw 0; transition:padding 0.3s ease;">
     <div style="display:flex; align-items:center; justify-content:space-between; max-width:1200px; margin:0 auto; padding:9px 9px 9px 20px; background:var(--nav-bg); backdrop-filter:blur(18px) saturate(160%); -webkit-backdrop-filter:blur(18px) saturate(160%); border:1px solid var(--border); border-radius:100px; box-shadow:{{ navShadow }}; transition:background 0.4s ease, box-shadow 0.35s ease, border-color 0.4s ease;">
-      <a href="Landing.dc.html" style="text-decoration:none; display:flex; align-items:center; position:relative; z-index:2;">
+      <a href="/" style="text-decoration:none; display:flex; align-items:center; position:relative; z-index:2;">
         <img src="assets/mx-logo.png" alt="Matxchange" style="height:25px; width:auto; display:block; filter:var(--logo-filter); transition:filter 0.4s ease;"></img>
       </a>
 
       <sc-if value="{{ showDesktopNav }}" hint-placeholder-val="{{ true }}">
         <div style="display:flex; align-items:center; gap:2px; position:relative; z-index:2;">
-          <a href="Landing.dc.html" style="text-decoration:none; display:flex; align-items:center; gap:7px; color:var(--ink); font-size:13.5px; font-weight:700; padding:9px 16px; border-radius:100px; background:var(--L2);"><span style="width:6px; height:6px; border-radius:50%; background:#5F8A5A; display:block;"></span> Home</a>
+          <a href="/" style="text-decoration:none; display:flex; align-items:center; gap:7px; color:var(--ink); font-size:13.5px; font-weight:700; padding:9px 16px; border-radius:100px; background:var(--L2);"><span style="width:6px; height:6px; border-radius:50%; background:#5F8A5A; display:block;"></span> Home</a>
           <a href="#how" style="text-decoration:none; color:var(--body); font-size:13.5px; font-weight:600; padding:9px 16px; border-radius:100px; transition:color 0.2s ease, background 0.2s ease;" style-hover="{background:'var(--L2)', color:'var(--ink)'}">How It Works</a>
           <a href="#solutions" style="text-decoration:none; color:var(--body); font-size:13.5px; font-weight:600; padding:9px 16px; border-radius:100px; transition:color 0.2s ease, background 0.2s ease;" style-hover="{background:'var(--L2)', color:'var(--ink)'}">Solutions</a>
           <a href="#about" style="text-decoration:none; color:var(--body); font-size:13.5px; font-weight:600; padding:9px 16px; border-radius:100px; transition:color 0.2s ease, background 0.2s ease;" style-hover="{background:'var(--L2)', color:'var(--ink)'}">About</a>
@@ -74,16 +74,6 @@
         </div>
       </sc-if>
     </div>
-
-    <sc-if value="{{ neverOpen }}" hint-placeholder-val="{{ false }}">
-      <div style="max-width:1320px; margin:0 auto; padding:0 4vw 18px; display:flex; flex-direction:column; gap:2px; position:relative; z-index:2;">
-        <a href="#how" onClick="{{ closeMenu }}" style="text-decoration:none; color:var(--ink); font-size:15px; font-weight:600; padding:10px 4px;">How It Works</a>
-        <div style="display:flex; gap:10px; margin-top:10px;">
-          <a href="Login.dc.html" style="flex:1; text-decoration:none; text-align:center; background:var(--L1); color:var(--ink); border:1.5px solid var(--ink); padding:12px; border-radius:100px; font-size:14px; font-weight:700;">Log In</a>
-          <a href="Signup.dc.html" style="flex:1; text-decoration:none; text-align:center; background:#1C1A17; color:#FBF9F5; padding:12px; border-radius:100px; font-size:14px; font-weight:700;">Get Started</a>
-        </div>
-      </div>
-    </sc-if>
   </div>
 
   <!-- HERO -->
@@ -98,7 +88,7 @@
     </p>
 
     <div style="position:relative; z-index:1; display:flex; align-items:center; justify-content:center; gap:16px; flex-wrap:wrap; margin-bottom:clamp(44px,7vw,72px);">
-      <a href="#solutions" style="text-decoration:none; display:inline-flex; align-items:center; gap:9px; background:#1C1A17; color:#FBF9F5; padding:17px 30px; border-radius:100px; font-size:15px; font-weight:700; transition:transform 0.2s ease, box-shadow 0.2s ease;" style-hover="{transform:translateY(-3px); boxShadow:'0 18px 34px -14px rgba(28,26,23,0.4)'}">Explore the platform <span>&#8594;</span></a>
+      <a href="Signup.dc.html" style="text-decoration:none; display:inline-flex; align-items:center; gap:9px; background:#1C1A17; color:#FBF9F5; padding:17px 30px; border-radius:100px; font-size:15px; font-weight:700; transition:transform 0.2s ease, box-shadow 0.2s ease;" style-hover="{transform:translateY(-3px); boxShadow:'0 18px 34px -14px rgba(28,26,23,0.4)'}">Get started free <span>&#8594;</span></a>
       <a href="#how" style="text-decoration:none; display:inline-flex; align-items:center; gap:9px; color:var(--ink); font-size:15px; font-weight:700;">See how it works <span>&#8594;</span></a>
     </div>
 
@@ -384,9 +374,13 @@
             <div style="margin-top:18px; font-size:13px; color:#E8896B; font-weight:600;">Please fill in the required fields with a valid email before sending.</div>
           </sc-if>
 
+          <sc-if value="{{ hasSendError }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top:18px; font-size:13px; color:#E8896B; font-weight:600;">{{ sendError }}</div>
+          </sc-if>
+
           <div style="display:flex; justify-content:flex-end; margin-top:28px;">
-            <button onClick="{{ submitForm }}" aria-label="Send message" style="position:relative; width:120px; height:120px; border:none; background:transparent; cursor:pointer;">
-              <svg viewBox="0 0 120 120" style="position:absolute; inset:0; width:100%; height:100%; animation:spinSlow 14s linear infinite;"><defs><path id="ring" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"></path></defs><text fill="rgba(255,255,255,0.85)" font-size="10.5" font-weight="700" letter-spacing="3.5" font-family="'Plus Jakarta Sans', sans-serif"><textPath href="#ring" startOffset="0">SEND YOUR MESSAGE · SEND YOUR MESSAGE · </textPath></text></svg>
+            <button onClick="{{ submitForm }}" aria-label="Send message" style="{{ sendButtonStyle }}">
+              <svg viewBox="0 0 120 120" style="position:absolute; inset:0; width:100%; height:100%; animation:spinSlow 14s linear infinite;"><defs><path id="ring" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"></path></defs><text fill="rgba(255,255,255,0.85)" font-size="10.5" font-weight="700" letter-spacing="3.5" font-family="'Plus Jakarta Sans', sans-serif"><textPath href="#ring" startOffset="0">{{ sendRingLabel }}</textPath></text></svg>
               <span style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:56px; height:56px; border-radius:50%; background:#FBF9F5; color:#1C1A17; display:flex; align-items:center; justify-content:center; font-size:20px;">&#8599;</span>
             </button>
           </div>
@@ -450,15 +444,15 @@
       </div>
     </div>
     <div style="max-width:1320px; margin:0 auto; padding:18px 4vw 30px; border-top:1px solid rgba(255,255,255,0.08); display:flex; flex-wrap:wrap; gap:8px 18px; align-items:center; justify-content:space-between; font-size:12.5px; color:#8A8477;">
-      <span>© 2026 Matxchange Ltd. All rights reserved.</span>
-      <span style="display:flex; gap:18px;"><a href="#" style="color:#8A8477; text-decoration:none;">Privacy</a><a href="#" style="color:#8A8477; text-decoration:none;">Terms</a></span>
+      <span>&#169; 2026 Matxchange Ltd. All rights reserved.</span>
+      <span style="display:flex; gap:18px;"><a href="mailto:samuel@matxchange.co.ke?subject=Privacy%20policy%20request" style="color:#8A8477; text-decoration:none;">Privacy</a><a href="mailto:samuel@matxchange.co.ke?subject=Terms%20request" style="color:#8A8477; text-decoration:none;">Terms</a></span>
     </div>
   </div>
 
   <!-- MOBILE APP-STYLE BOTTOM NAV -->
   <sc-if value="{{ showMobileToggle }}" hint-placeholder-val="{{ false }}">
     <div style="position:fixed; left:12px; right:12px; bottom:14px; z-index:40; background:var(--nav-bg); backdrop-filter:blur(20px) saturate(160%); -webkit-backdrop-filter:blur(20px) saturate(160%); border:1px solid var(--border); border-radius:24px; box-shadow:0 18px 44px -18px rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:space-around; padding:10px 6px;">
-      <a href="Landing.dc.html" style="text-decoration:none; display:flex; flex-direction:column; align-items:center; gap:4px; color:var(--ink); flex:1;">
+      <a href="/" style="text-decoration:none; display:flex; flex-direction:column; align-items:center; gap:4px; color:var(--ink); flex:1;">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 11.5L12 4l8 7.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path><path d="M6 10v9h12v-9" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
         <span style="font-size:10px; font-weight:700;">Home</span>
       </a>
@@ -487,9 +481,10 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
+  api = 'https://app.matxchange.co.ke';
+
   state = {
     isCompact: false,
-    mobileMenuOpen: false,
     revealed: {},
     counts: { waste: 0, recycled: 0, biz: 0, value: 0 },
     darkMode: false,
@@ -497,6 +492,8 @@ class Component extends DCLogic {
     expanded: 1,
     form: { name: '', email: '', company: '', role: '', message: '' },
     errors: {},
+    sending: false,
+    sendError: '',
     sent: false,
   };
 
@@ -540,34 +537,71 @@ class Component extends DCLogic {
   };
 
   checkWidth = () => {
-    const isCompact = window.innerWidth < 920;
-    this.setState(st => ({ isCompact, mobileMenuOpen: isCompact ? st.mobileMenuOpen : false }));
+    this.setState({ isCompact: window.innerWidth < 920 });
   };
 
-  toggleMenu = () => this.setState(s => ({ mobileMenuOpen: !s.mobileMenuOpen }));
-  closeMenu = () => this.setState({ mobileMenuOpen: false });
   toggleDark = () => this.setState(s => ({ darkMode: !s.darkMode }));
   setExpanded = (i) => () => this.setState({ expanded: i });
 
   field = (key) => (e) => {
     const v = e.target.value;
-    this.setState(s => ({ form: { ...s.form, [key]: v }, errors: { ...s.errors, [key]: false } }));
+    this.setState(s => ({
+      form: { ...s.form, [key]: v },
+      errors: { ...s.errors, [key]: false },
+      sendError: '',
+    }));
   };
-  submitForm = () => {
+
+  // Frappe buries readable messages inside _server_messages.
+  readError(data, status) {
+    try {
+      const msgs = JSON.parse(data._server_messages || '[]');
+      const text = msgs.map(m => JSON.parse(m).message).join(' ');
+      if (text) return text.replace(/<[^>]*>/g, '').trim();
+    } catch (e) {}
+    if (status === 429) return 'You\u2019ve sent several messages already. Please try again later.';
+    return 'Could not send your message. Please try again.';
+  }
+
+  submitForm = async () => {
+    if (this.state.sending) return;
+
     const f = this.state.form;
     const errors = {};
     if (!f.name.trim()) errors.name = true;
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.trim())) errors.email = true;
     if (!f.role.trim()) errors.role = true;
     if (!f.message.trim()) errors.message = true;
-    if (Object.keys(errors).length) { this.setState({ errors }); return; }
+    if (Object.keys(errors).length) { this.setState({ errors, sendError: '' }); return; }
 
-    const subject = encodeURIComponent(`Matxchange enquiry from ${f.name || 'website visitor'}`);
-    const body = encodeURIComponent(
-      `Name: ${f.name}\nEmail: ${f.email}\nCompany: ${f.company}\nRole: ${f.role}\n\nMessage:\n${f.message}`
-    );
-    try { window.open(`mailto:samuel@matxchange.co.ke?subject=${subject}&body=${body}`, '_blank'); } catch (e) {}
-    this.setState({ sent: true, errors: {} });
+    this.setState({ sending: true, sendError: '', errors: {} });
+
+    try {
+      const res = await fetch(this.api + '/api/method/matxchange.api.submit_contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({
+          name: f.name.trim(),
+          email: f.email.trim().toLowerCase(),
+          company: f.company.trim(),
+          role: f.role.trim(),
+          message: f.message.trim(),
+        }),
+      });
+
+      let data = {};
+      try { data = await res.json(); } catch (e) {}
+
+      if (!res.ok) throw new Error(this.readError(data, res.status));
+
+      this.setState({ sending: false, sent: true });
+    } catch (err) {
+      this.setState({
+        sending: false,
+        sendError: err.message || 'Could not reach the server. Check your connection.',
+      });
+    }
   };
 
   themeVars(dark) {
@@ -628,7 +662,7 @@ class Component extends DCLogic {
   descOpen(i) { return this.state.expanded === i || this.state.isCompact; }
 
   renderVals() {
-    const { counts, scrolled, form, sent } = this.state;
+    const { counts, scrolled, form, sent, sending } = this.state;
     const rs = (key) => this.revealStyle(key);
     return {
       rootStyle: {
@@ -641,10 +675,6 @@ class Component extends DCLogic {
       toggleDark: this.toggleDark,
       showDesktopNav: !this.state.isCompact,
       showMobileToggle: this.state.isCompact,
-      mobileMenuOpen: this.state.isCompact && this.state.mobileMenuOpen,
-      neverOpen: false,
-      toggleMenu: this.toggleMenu,
-      closeMenu: this.closeMenu,
       navShadow: scrolled ? '0 18px 44px -22px rgba(0,0,0,0.35)' : '0 8px 24px -20px rgba(0,0,0,0.2)',
       navPad: scrolled ? '10px' : '18px',
 
@@ -692,6 +722,16 @@ class Component extends DCLogic {
       onName: this.field('name'), onEmail: this.field('email'), onCompany: this.field('company'),
       onRole: this.field('role'), onMessage: this.field('message'),
       submitForm: this.submitForm,
+      sendRingLabel: sending
+        ? 'SENDING\u2026 \u00B7 SENDING\u2026 \u00B7 '
+        : 'SEND YOUR MESSAGE \u00B7 SEND YOUR MESSAGE \u00B7 ',
+      sendButtonStyle: {
+        position: 'relative', width: '120px', height: '120px', border: 'none',
+        background: 'transparent', cursor: sending ? 'default' : 'pointer',
+        opacity: sending ? 0.6 : 1, transition: 'opacity 0.2s ease',
+      },
+      sendError: this.state.sendError,
+      hasSendError: !!this.state.sendError,
       errName: this.state.errors.name ? '1px solid #E8896B' : '1px solid rgba(255,255,255,0.22)',
       errEmail: this.state.errors.email ? '1px solid #E8896B' : '1px solid rgba(255,255,255,0.22)',
       errRole: this.state.errors.role ? '1px solid #E8896B' : '1px solid rgba(255,255,255,0.22)',
