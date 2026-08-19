@@ -54,85 +54,137 @@
   <!-- content -->
   <div style="position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:calc(100vh - 78px); padding: 24px 20px 60px; opacity:{{ mountedOpacity }}; transform:{{ mountedTransform }}; transition:opacity 0.6s ease, transform 0.6s ease;">
 
-    <div style="text-align:center; margin-bottom:32px;">
-      <h1 style="font-family:'Space Grotesk', sans-serif; font-size:clamp(28px,5.5vw,36px); font-weight:600; color:#1C1A17; margin:0 0 8px; letter-spacing:-0.02em;">Welcome back</h1>
-      <div style="font-size:15px; color:#6B655C;">Log in to continue to Matxchange</div>
-    </div>
+    <!-- ===== password login ===== -->
+    <sc-if value="{{ showPasswordForm }}" hint-placeholder-val="{{ true }}">
 
-    <!-- card -->
-    <div style="width:100%; max-width:440px; background:#FFFFFF; border:1px solid #E7E1D6; border-radius:20px; box-shadow: 0 24px 60px -20px rgba(28,26,23,0.14); padding:clamp(24px,5vw,36px) clamp(20px,5vw,32px);">
-
-      <form style="display:flex; flex-direction:column; gap:16px;" onSubmit="{{ handleSubmit }}">
-
-        <div>
-          <label style="display:block; font-size:13px; font-weight:600; color:#1C1A17; margin-bottom:7px;">Email address</label>
-          <div style="display:flex; align-items:center; gap:11px; background:#F7F4EE; border:1px solid #E7E1D6; border-radius:12px; padding:11px 13px;">
-            <span style="width:32px; height:32px; border-radius:9px; background:#F1E7D6; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                <rect x="3" y="5" width="18" height="14" rx="2.5" stroke="#8A5A2E" stroke-width="1.7"></rect>
-                <path d="M4 7L12 13L20 7" stroke="#8A5A2E" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>
-              </svg>
-            </span>
-            <input type="email" value="{{ email }}" onChange="{{ setEmail }}" placeholder="jane@example.com" style="border:none; background:transparent; width:100%; font-size:15px; color:#1C1A17; font-family:'IBM Plex Sans', sans-serif;"></input>
-          </div>
-        </div>
-
-        <div>
-          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:7px;">
-            <label style="font-size:13px; font-weight:600; color:#1C1A17;">Password</label>
-            <a href="ForgotPassword.dc.html" style="font-size:13px; color:#8A5A2E; text-decoration:none; font-weight:500;" style-hover="{color:#6E4522}">Forgot password?</a>
-          </div>
-          <div style="display:flex; align-items:center; gap:11px; background:#F7F4EE; border:1px solid #E7E1D6; border-radius:12px; padding:11px 13px;">
-            <span style="width:32px; height:32px; border-radius:9px; background:#E5EDE3; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
-                <rect x="4" y="10" width="16" height="10" rx="2.5" stroke="#5F8A5A" stroke-width="1.7"></rect>
-                <path d="M7.5 10V7.5a4.5 4.5 0 0 1 9 0V10" stroke="#5F8A5A" stroke-width="1.7"></path>
-                <circle cx="12" cy="15" r="1.5" fill="#5F8A5A"></circle>
-              </svg>
-            </span>
-            <input type="{{ passwordType }}" value="{{ password }}" onChange="{{ setPassword }}" placeholder="••••••••" style="border:none; background:transparent; width:100%; font-size:15px; color:#1C1A17; font-family:'IBM Plex Sans', sans-serif;"></input>
-            <button type="button" onClick="{{ togglePassword }}" style="border:none; background:transparent; color:#6B655C; font-size:13px; font-weight:600; cursor:pointer; font-family:'IBM Plex Sans', sans-serif;">{{ toggleLabel }}</button>
-          </div>
-        </div>
-
-        <sc-if value="{{ hasError }}" hint-placeholder-val="{{ false }}">
-          <div style="display:flex; align-items:flex-start; gap:9px; background:#FDF0EE; border:1px solid #F3D2CC; border-radius:11px; padding:11px 13px; font-size:13.5px; line-height:1.45; color:#9B3A28;">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" style="flex-shrink:0; margin-top:1px;"><circle cx="12" cy="12" r="9" stroke="#C0503A" stroke-width="1.8"></circle><path d="M12 7.5v5" stroke="#C0503A" stroke-width="1.8" stroke-linecap="round"></path><circle cx="12" cy="16" r="1" fill="#C0503A"></circle></svg>
-            <span>{{ error }}</span>
-          </div>
-        </sc-if>
-
-        <button type="submit" style="{{ submitStyle }}">{{ submitLabel }}</button>
-      </form>
-
-      <div style="display:flex; align-items:center; gap:14px; margin:26px 0;">
-        <div style="flex:1; height:1px; background:#E7E1D6;"></div>
-        <span style="font-size:12px; color:#A79F91; font-weight:500; letter-spacing:0.04em; text-transform:uppercase;">or continue with</span>
-        <div style="flex:1; height:1px; background:#E7E1D6;"></div>
+      <div style="text-align:center; margin-bottom:32px;">
+        <h1 style="font-family:'Space Grotesk', sans-serif; font-size:clamp(28px,5.5vw,36px); font-weight:600; color:#1C1A17; margin:0 0 8px; letter-spacing:-0.02em;">Welcome back</h1>
+        <div style="font-size:15px; color:#6B655C;">Log in to continue to Matxchange</div>
       </div>
 
-      <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:10px;">
-        <button type="button" onClick="{{ loginWithGoogle }}" style="display:inline-flex; align-items:center; gap:8px; padding:11px 18px; background:#FFFFFF; border:1px solid #E7E1D6; border-radius:100px; font-size:14px; font-weight:600; color:#1C1A17; cursor:pointer; font-family:'IBM Plex Sans', sans-serif; transition:background 0.15s ease, border-color 0.15s ease;" style-hover="{background:#F7F4EE; borderColor:#D9CFBE}">
-          <svg width="17" height="17" viewBox="0 0 18 18">
-            <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.259h2.908c1.702-1.567 2.684-3.874 2.684-6.617z"></path>
-            <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"></path>
-            <path fill="#FBBC05" d="M3.964 10.71c-.18-.54-.282-1.117-.282-1.71s.102-1.17.282-1.71V4.958H.957C.347 6.173 0 7.548 0 9s.348 2.827.957 4.042l3.007-2.332z"></path>
-            <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z"></path>
-          </svg>
-          Google
-        </button>
+      <div style="width:100%; max-width:440px; background:#FFFFFF; border:1px solid #E7E1D6; border-radius:20px; box-shadow: 0 24px 60px -20px rgba(28,26,23,0.14); padding:clamp(24px,5vw,36px) clamp(20px,5vw,32px);">
 
-        <button type="button" onClick="{{ loginWithEmailLink }}" style="display:inline-flex; align-items:center; gap:8px; padding:11px 18px; background:#FFFFFF; border:1px solid #E7E1D6; border-radius:100px; font-size:14px; font-weight:600; color:#1C1A17; cursor:pointer; font-family:'IBM Plex Sans', sans-serif; transition:background 0.15s ease, border-color 0.15s ease;" style-hover="{background:#F7F4EE; borderColor:#D9CFBE}">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2.5" stroke="#1C1A17" stroke-width="1.7"></rect><path d="M4 7L12 13L20 7" stroke="#1C1A17" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-          Email link
-        </button>
+        <form style="display:flex; flex-direction:column; gap:16px;" onSubmit="{{ handleSubmit }}">
+
+          <div>
+            <label style="display:block; font-size:13px; font-weight:600; color:#1C1A17; margin-bottom:7px;">Email or phone number</label>
+            <div style="display:flex; align-items:center; gap:11px; background:#F7F4EE; border:1px solid #E7E1D6; border-radius:12px; padding:11px 13px;">
+              <span style="width:32px; height:32px; border-radius:9px; background:#F1E7D6; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <rect x="3" y="5" width="18" height="14" rx="2.5" stroke="#8A5A2E" stroke-width="1.7"></rect>
+                  <path d="M4 7L12 13L20 7" stroke="#8A5A2E" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </span>
+              <input type="text" inputmode="email" autocomplete="username" value="{{ email }}" onChange="{{ setEmail }}" placeholder="jane@example.com or +254 7XX XXX XXX" style="border:none; background:transparent; width:100%; font-size:15px; color:#1C1A17; font-family:'IBM Plex Sans', sans-serif;"></input>
+            </div>
+          </div>
+
+          <div>
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:7px;">
+              <label style="font-size:13px; font-weight:600; color:#1C1A17;">Password</label>
+              <a href="ForgotPassword.dc.html" style="font-size:13px; color:#8A5A2E; text-decoration:none; font-weight:500;" style-hover="{color:#6E4522}">Forgot password?</a>
+            </div>
+            <div style="display:flex; align-items:center; gap:11px; background:#F7F4EE; border:1px solid #E7E1D6; border-radius:12px; padding:11px 13px;">
+              <span style="width:32px; height:32px; border-radius:9px; background:#E5EDE3; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+                  <rect x="4" y="10" width="16" height="10" rx="2.5" stroke="#5F8A5A" stroke-width="1.7"></rect>
+                  <path d="M7.5 10V7.5a4.5 4.5 0 0 1 9 0V10" stroke="#5F8A5A" stroke-width="1.7"></path>
+                  <circle cx="12" cy="15" r="1.5" fill="#5F8A5A"></circle>
+                </svg>
+              </span>
+              <input type="{{ passwordType }}" autocomplete="current-password" value="{{ password }}" onChange="{{ setPassword }}" placeholder="••••••••" style="border:none; background:transparent; width:100%; font-size:15px; color:#1C1A17; font-family:'IBM Plex Sans', sans-serif;"></input>
+              <button type="button" onClick="{{ togglePassword }}" style="border:none; background:transparent; color:#6B655C; font-size:13px; font-weight:600; cursor:pointer; font-family:'IBM Plex Sans', sans-serif;">{{ toggleLabel }}</button>
+            </div>
+          </div>
+
+          <sc-if value="{{ hasError }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex; align-items:flex-start; gap:9px; background:#FDF0EE; border:1px solid #F3D2CC; border-radius:11px; padding:11px 13px; font-size:13.5px; line-height:1.45; color:#9B3A28;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" style="flex-shrink:0; margin-top:1px;"><circle cx="12" cy="12" r="9" stroke="#C0503A" stroke-width="1.8"></circle><path d="M12 7.5v5" stroke="#C0503A" stroke-width="1.8" stroke-linecap="round"></path><circle cx="12" cy="16" r="1" fill="#C0503A"></circle></svg>
+              <span>{{ error }}</span>
+            </div>
+          </sc-if>
+
+          <button type="submit" style="{{ submitStyle }}">{{ submitLabel }}</button>
+        </form>
+
+        <div style="display:flex; align-items:center; gap:14px; margin:26px 0;">
+          <div style="flex:1; height:1px; background:#E7E1D6;"></div>
+          <span style="font-size:12px; color:#A79F91; font-weight:500; letter-spacing:0.04em; text-transform:uppercase;">or continue with</span>
+          <div style="flex:1; height:1px; background:#E7E1D6;"></div>
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:10px;">
+          <button type="button" onClick="{{ loginWithGoogle }}" style="display:inline-flex; align-items:center; gap:8px; padding:11px 18px; background:#FFFFFF; border:1px solid #E7E1D6; border-radius:100px; font-size:14px; font-weight:600; color:#1C1A17; cursor:pointer; font-family:'IBM Plex Sans', sans-serif; transition:background 0.15s ease, border-color 0.15s ease;" style-hover="{background:#F7F4EE; borderColor:#D9CFBE}">
+            <svg width="17" height="17" viewBox="0 0 18 18">
+              <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.259h2.908c1.702-1.567 2.684-3.874 2.684-6.617z"></path>
+              <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"></path>
+              <path fill="#FBBC05" d="M3.964 10.71c-.18-.54-.282-1.117-.282-1.71s.102-1.17.282-1.71V4.958H.957C.347 6.173 0 7.548 0 9s.348 2.827.957 4.042l3.007-2.332z"></path>
+              <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z"></path>
+            </svg>
+            Google
+          </button>
+
+          <button type="button" onClick="{{ startEmailLink }}" style="display:inline-flex; align-items:center; gap:8px; padding:11px 18px; background:#FFFFFF; border:1px solid #E7E1D6; border-radius:100px; font-size:14px; font-weight:600; color:#1C1A17; cursor:pointer; font-family:'IBM Plex Sans', sans-serif; transition:background 0.15s ease, border-color 0.15s ease;" style-hover="{background:#F7F4EE; borderColor:#D9CFBE}">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2.5" stroke="#1C1A17" stroke-width="1.7"></rect><path d="M4 7L12 13L20 7" stroke="#1C1A17" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            Email link
+          </button>
+        </div>
+
       </div>
 
-    </div>
+      <div style="margin-top:28px; font-size:14px; color:#6B655C;">
+        Don't have an account? <a href="Signup.dc.html" style="color:#1C1A17; font-weight:600; text-decoration:none; border-bottom:1px solid #1C1A17;">Sign up</a>
+      </div>
 
-    <div style="margin-top:28px; font-size:14px; color:#6B655C;">
-      Don't have an account? <a href="Signup.dc.html" style="color:#1C1A17; font-weight:600; text-decoration:none; border-bottom:1px solid #1C1A17;">Sign up</a>
-    </div>
+    </sc-if>
+
+    <!-- ===== email-link request ===== -->
+    <sc-if value="{{ showLinkForm }}" hint-placeholder-val="{{ false }}">
+
+      <div style="text-align:center; margin-bottom:32px;">
+        <h1 style="font-family:'Space Grotesk', sans-serif; font-size:clamp(28px,5.5vw,36px); font-weight:600; color:#1C1A17; margin:0 0 8px; letter-spacing:-0.02em;">Log in with a link</h1>
+        <div style="font-size:15px; color:#6B655C; max-width:340px; line-height:1.5;">We'll email you a link that signs you in. No password needed.</div>
+      </div>
+
+      <div style="width:100%; max-width:440px; background:#FFFFFF; border:1px solid #E7E1D6; border-radius:20px; box-shadow: 0 24px 60px -20px rgba(28,26,23,0.14); padding:clamp(24px,5vw,36px) clamp(20px,5vw,32px);">
+        <form style="display:flex; flex-direction:column; gap:16px;" onSubmit="{{ sendEmailLink }}">
+          <div>
+            <label style="display:block; font-size:13px; font-weight:600; color:#1C1A17; margin-bottom:7px;">Email address</label>
+            <div style="display:flex; align-items:center; gap:10px; background:#F7F4EE; border:1px solid #E7E1D6; border-radius:12px; padding:13px 14px;">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;">
+                <rect x="3" y="5" width="18" height="14" rx="2" stroke="#8A7F6E" stroke-width="1.6"></rect>
+                <path d="M4 6.5L12 13L20 6.5" stroke="#8A7F6E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+              <input type="email" autocomplete="email" value="{{ email }}" onChange="{{ setEmail }}" placeholder="jane@example.com" style="border:none; background:transparent; width:100%; font-size:15px; color:#1C1A17; font-family:'IBM Plex Sans', sans-serif;"></input>
+            </div>
+          </div>
+
+          <sc-if value="{{ hasError }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex; align-items:flex-start; gap:9px; background:#FDF0EE; border:1px solid #F3D2CC; border-radius:11px; padding:11px 13px; font-size:13.5px; line-height:1.45; color:#9B3A28;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" style="flex-shrink:0; margin-top:1px;"><circle cx="12" cy="12" r="9" stroke="#C0503A" stroke-width="1.8"></circle><path d="M12 7.5v5" stroke="#C0503A" stroke-width="1.8" stroke-linecap="round"></path><circle cx="12" cy="16" r="1" fill="#C0503A"></circle></svg>
+              <span>{{ error }}</span>
+            </div>
+          </sc-if>
+
+          <button type="submit" style="{{ linkSubmitStyle }}">{{ linkSubmitLabel }}</button>
+        </form>
+
+        <button type="button" onClick="{{ backToPassword }}" style="margin-top:18px; width:100%; border:none; background:transparent; color:#8A5A2E; font-size:14px; font-weight:600; cursor:pointer; font-family:'IBM Plex Sans', sans-serif;">Use a password instead</button>
+      </div>
+
+    </sc-if>
+
+    <!-- ===== email-link sent ===== -->
+    <sc-if value="{{ showLinkSent }}" hint-placeholder-val="{{ false }}">
+      <div style="width:100%; max-width:440px; background:#FFFFFF; border:1px solid #E7E1D6; border-radius:20px; box-shadow: 0 24px 60px -20px rgba(28,26,23,0.14); padding:clamp(32px,6vw,44px) clamp(24px,5vw,36px); text-align:center;">
+        <div style="width:56px; height:56px; border-radius:50%; background-image:linear-gradient(135deg,#8A5A2E,#D9A441); display:flex; align-items:center; justify-content:center; margin:0 auto 22px;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="#FBF9F5" stroke-width="1.8"></rect><path d="M4 6.5L12 13L20 6.5" stroke="#FBF9F5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </div>
+        <h1 style="font-family:'Space Grotesk', sans-serif; font-size:24px; font-weight:600; color:#1C1A17; margin:0 0 12px; letter-spacing:-0.01em;">Check your email</h1>
+        <p style="font-size:14.5px; line-height:1.6; color:#6B655C; margin:0 0 26px;">If <strong style="color:#1C1A17;">{{ email }}</strong> has an account, a login link is on its way. Open it on this device.</p>
+        <button type="button" onClick="{{ backToPassword }}" style="width:100%; padding:14px; background:#1C1A17; color:#FBF9F5; border:none; border-radius:12px; font-size:15px; font-weight:600; font-family:'IBM Plex Sans', sans-serif; cursor:pointer;" style-hover="{background:#332F29}">Back to login</button>
+      </div>
+    </sc-if>
 
   </div>
 </div>
@@ -141,46 +193,43 @@
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
   api = 'https://app.matxchange.co.ke';
+  afterLogin = '/app';
 
   state = {
-    step: 1,
-    entering: false,
+    view: 'password',      // 'password' | 'link' | 'linkSent'
     showPassword: false,
+    mounted: false,
     isIOS: false,
-    confirmScale: 0,
-    loading: false,
+    email: '',
+    password: '',
     error: '',
-    formData: {
-      name: '', email: '', phone: '', company: '', role: 'Waste Generator', password: '',
-    },
+    loading: false,
   };
 
   componentDidMount() {
+    requestAnimationFrame(() => this.setState({ mounted: true }));
+
     const ua = navigator.userAgent || '';
     const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
     this.setState({ isIOS });
+
+    // Frappe redirects here with ?login=failed or similar after a failed
+    // social login; surface that rather than showing a blank form.
+    try {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('login') === 'failed') {
+        this.setState({ error: 'That sign-in didn\u2019t complete. Please try again.' });
+      }
+    } catch (e) {}
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.step === 5 && prevState.step !== 5) {
-      requestAnimationFrame(() => requestAnimationFrame(() => this.setState({ confirmScale: 1 })));
-    }
-  }
-
-  roleOptions = ['Waste Generator', 'Recycler', 'Aggregator', 'Buyer'];
-
-  stepLabels = {
-    1: 'Your details',
-    2: 'Company',
-    3: 'Account type',
-    4: 'Password',
+  togglePassword = () => {
+    this.setState(s => ({ showPassword: !s.showPassword }));
   };
 
-  animateTo = (step) => {
-    this.setState({ step, entering: true });
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => this.setState({ entering: false }));
-    });
+  setField = (field) => (e) => {
+    const value = e.target.value;
+    this.setState({ [field]: value, error: '' });
   };
 
   // Frappe buries readable messages inside _server_messages.
@@ -190,59 +239,40 @@ class Component extends DCLogic {
       const text = msgs.map(m => JSON.parse(m).message).join(' ');
       if (text) return text.replace(/<[^>]*>/g, '').trim();
     } catch (e) {}
-    if (status === 429) return 'Too many attempts. Please try again in an hour.';
+    if (status === 401) return 'That email and password don\u2019t match an account.';
+    if (status === 417) return 'Too many failed attempts. Please wait a moment and try again.';
+    if (status === 429) return 'Too many attempts. Please try again shortly.';
     if (data && data.message) return String(data.message).replace(/<[^>]*>/g, '').trim();
-    return 'Could not create your account. Please try again.';
+    return 'Could not log in. Please try again.';
   }
 
-  validateStep = () => {
-    const { step, formData } = this.state;
-    if (step === 1) {
-      if (!(formData.name || '').trim()) return 'Please enter your full name.';
-      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test((formData.email || '').trim())) {
-        return 'That email address doesn\u2019t look right.';
-      }
+  // Where to send the user once Frappe has issued a session.
+  destination(data) {
+    try {
+      const requested = new URLSearchParams(window.location.search).get('redirect-to');
+      if (requested && requested.startsWith('/')) return this.api + requested;
+    } catch (e) {}
+    return this.api + ((data && data.home_page) || this.afterLogin);
+  }
+
+  handleSubmit = async (e) => {
+    e.preventDefault();
+    const email = (this.state.email || '').trim();
+    const password = this.state.password || '';
+
+    if (!email || !password) {
+      this.setState({ error: 'Enter your email and password.' });
+      return;
     }
-    if (step === 4) {
-      if ((formData.password || '').length < 8) {
-        return 'Your password must be at least 8 characters.';
-      }
-    }
-    return '';
-  };
 
-  goNext = () => {
-    const problem = this.validateStep();
-    if (problem) { this.setState({ error: problem }); return; }
-    this.setState({ error: '' });
-    if (this.state.step < 5) this.animateTo(this.state.step + 1);
-  };
-
-  goBack = () => {
-    this.setState({ error: '' });
-    if (this.state.step > 1) this.animateTo(this.state.step - 1);
-  };
-
-  submit = async () => {
-    const problem = this.validateStep();
-    if (problem) { this.setState({ error: problem }); return; }
-
-    const f = this.state.formData;
     this.setState({ loading: true, error: '' });
 
     try {
-      const res = await fetch(this.api + '/api/method/matxchange.api.register', {
+      const res = await fetch(this.api + '/api/method/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         credentials: 'include',
-        body: JSON.stringify({
-          full_name: (f.name || '').trim(),
-          email: (f.email || '').trim().toLowerCase(),
-          password: f.password,
-          phone: (f.phone || '').trim(),
-          company: (f.company || '').trim(),
-          role: f.role,
-        }),
+        body: JSON.stringify({ usr: email, pwd: password }),
       });
 
       let data = {};
@@ -250,122 +280,109 @@ class Component extends DCLogic {
 
       if (!res.ok) throw new Error(this.readError(data, res.status));
 
-      const payload = (data && data.message) || {};
-      if (payload.status === 'exists') throw new Error(payload.message);
-
-      this.setState({ loading: false });
-      this.animateTo(5);
+      window.location.href = this.destination(data);
     } catch (err) {
       this.setState({
-        loading: false,
         error: err.message || 'Could not reach the server. Check your connection.',
+        loading: false,
       });
     }
   };
 
-  togglePassword = () => this.setState(s => ({ showPassword: !s.showPassword }));
-
-  setField = (field) => (e) => {
-    const value = e.target.value;
-    this.setState(s => ({ formData: { ...s.formData, [field]: value }, error: '' }));
+  loginWithGoogle = () => {
+    window.location.href = this.api + '/api/method/frappe.integrations.oauth2_logins.login_via_google';
   };
 
-  selectRole = (role) => this.setState(s => ({ formData: { ...s.formData, role } }));
+  startEmailLink = () => {
+    this.setState({ view: 'link', error: '', password: '' });
+  };
 
-  baseBtnStyle = {
-    display: 'flex', alignItems: 'center', gap: '9px', padding: '12px 14px',
-    borderRadius: '11px', fontSize: '14px', fontWeight: 500,
-    fontFamily: "'IBM Plex Sans', sans-serif", cursor: 'pointer', textAlign: 'left',
-    transition: 'background 0.15s ease',
+  backToPassword = () => {
+    this.setState({ view: 'password', error: '' });
+  };
+
+  sendEmailLink = async (e) => {
+    e.preventDefault();
+    const email = (this.state.email || '').trim().toLowerCase();
+
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      this.setState({ error: 'Enter the email address on your account.' });
+      return;
+    }
+
+    this.setState({ loading: true, error: '' });
+
+    try {
+      const res = await fetch(this.api + '/api/method/frappe.www.login.send_login_link', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ email: email }),
+      });
+
+      // A 404 means this Frappe version doesn't expose the endpoint, or
+      // "Login with email link" is switched off in System Settings. Fall
+      // back to Frappe's own login page rather than dead-ending.
+      if (res.status === 404) {
+        window.location.href = this.api + '/login';
+        return;
+      }
+
+      // Any other failure is reported as success on purpose: revealing
+      // which emails have accounts is an information leak.
+      this.setState({ loading: false, view: 'linkSent' });
+    } catch (err) {
+      this.setState({ loading: false, view: 'linkSent' });
+    }
   };
 
   renderVals() {
-    const { step, formData, entering, loading } = this.state;
-    const pw = formData.password || '';
-    const reqChecks = [
-      { label: 'At least 8 characters', met: pw.length >= 8 },
-      { label: 'Upper & lowercase letters', met: /[A-Z]/.test(pw) && /[a-z]/.test(pw) },
-      { label: 'At least one number', met: /[0-9]/.test(pw) },
-      { label: 'At least one symbol', met: /[^A-Za-z0-9]/.test(pw) },
-    ];
-    const requirements = reqChecks.map((r) => ({
-      label: r.label,
-      iconColor: r.met ? '#FFFFFF' : '#A79F91',
-      iconWrapStyle: {
-        width: '15px', height: '15px', borderRadius: '50%', flexShrink: 0,
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        background: r.met ? '#5F8A5A' : '#F0EBE0',
-        transition: 'background 0.2s ease',
-      },
-      textStyle: { fontSize: '13px', color: r.met ? '#1C1A17' : '#A79F91', transition: 'color 0.2s ease' },
-    }));
+    const loading = this.state.loading;
+    const view = this.state.view;
 
-    const segments = [1, 2, 3, 4].map((n) => ({
-      color: n <= step ? '#1C1A17' : '#E7E1D6',
-    }));
-
-    const roles = this.roleOptions.map((label) => {
-      const selected = label === formData.role;
-      return {
-        label,
-        onClick: () => this.selectRole(label),
-        style: {
-          ...this.baseBtnStyle,
-          background: selected ? '#FBF3E6' : '#FFFFFF',
-          border: selected ? '1.5px solid #D9A441' : '1.5px solid #E7E1D6',
-          color: '#1C1A17',
-        },
-        dotStyle: {
-          width: '8px', height: '8px', borderRadius: '50%', flexShrink: 0,
-          background: selected ? 'linear-gradient(135deg,#8A5A2E,#D9A441)' : '#D8D2C4',
-        },
-      };
+    const buttonStyle = (busy) => ({
+      marginTop: '8px',
+      width: '100%',
+      padding: '14px',
+      background: busy ? '#4A453D' : '#1C1A17',
+      color: '#FBF9F5',
+      border: 'none',
+      borderRadius: '12px',
+      fontSize: '15px',
+      fontWeight: 600,
+      fontFamily: "'IBM Plex Sans', sans-serif",
+      cursor: busy ? 'default' : 'pointer',
     });
 
-    const headlines = {
-      1: 'Create your Matxchange account',
-      2: 'Tell us where you work',
-      3: 'Choose your role',
-      4: 'Secure your account',
-      5: 'You\u2019re all set',
-    };
-
     return {
-      headline: headlines[step],
-      showProgress: step < 5,
-      stepNumber: step,
-      stepLabel: this.stepLabels[step] || '',
-      segments,
-      isStep1: step === 1, isStep2: step === 2, isStep3: step === 3, isStep4: step === 4, isStep5: step === 5,
-      enterOpacity: entering ? 0 : 1,
-      enterTransform: entering ? 'translateX(14px)' : 'translateX(0)',
-      formData,
-      setName: this.setField('name'),
+      email: this.state.email,
+      password: this.state.password,
       setEmail: this.setField('email'),
-      setPhone: this.setField('phone'),
-      setCompany: this.setField('company'),
       setPassword: this.setField('password'),
-      roles,
+      error: this.state.error,
+      hasError: !!this.state.error,
       passwordType: this.state.showPassword ? 'text' : 'password',
       toggleLabel: this.state.showPassword ? 'Hide' : 'Show',
       togglePassword: this.togglePassword,
-      requirements,
+      handleSubmit: this.handleSubmit,
+      loginWithGoogle: this.loginWithGoogle,
+      startEmailLink: this.startEmailLink,
+      sendEmailLink: this.sendEmailLink,
+      backToPassword: this.backToPassword,
+      submitLabel: loading ? 'Logging in\u2026' : 'Log in',
+      submitStyle: buttonStyle(loading),
+      linkSubmitLabel: loading ? 'Sending\u2026' : 'Email me a link',
+      linkSubmitStyle: buttonStyle(loading),
+      showPasswordForm: view === 'password',
+      showLinkForm: view === 'link',
+      showLinkSent: view === 'linkSent',
+      mountedOpacity: this.state.mounted ? 1 : 0,
+      mountedTransform: this.state.mounted ? 'translateY(0)' : 'translateY(14px)',
       isIOS: this.state.isIOS,
-      dots: Array.from({ length: 16 }, () => ({})),
-      confirmScale: this.state.confirmScale === 1 ? 'scale(1)' : 'scale(0.4)',
-      showNavButtons: step < 5,
-      showBack: step > 1 && !loading,
-      goBack: this.goBack,
-      primaryAction: step === 4 ? this.submit : this.goNext,
-      primaryLabel: loading ? 'Creating account\u2026' : (step === 4 ? 'Create account' : 'Continue'),
-      error: this.state.error,
-      hasError: !!this.state.error,
-      confirmationHeadline: formData.name ? `Welcome, ${formData.name.split(' ')[0]}!` : 'Welcome to Matxchange!',
-      confirmationCompanySuffix: formData.company ? ` at ${formData.company}` : '',
-      showFooterLink: step < 5,
     };
   }
 }
+
 </script>
 </body>
 </html>
