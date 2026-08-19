@@ -203,6 +203,13 @@
       </div>
     </sc-if>
 
+          <sc-if value="{{ hasError }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex; align-items:flex-start; gap:9px; background:#FDF0EE; border:1px solid #F3D2CC; border-radius:11px; padding:11px 13px; font-size:13.5px; line-height:1.45; color:#9B3A28; margin-top:18px;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" style="flex-shrink:0; margin-top:1px;"><circle cx="12" cy="12" r="9" stroke="#C0503A" stroke-width="1.8"></circle><path d="M12 7.5v5" stroke="#C0503A" stroke-width="1.8" stroke-linecap="round"></path><circle cx="12" cy="16" r="1" fill="#C0503A"></circle></svg>
+          <span>{{ error }}</span>
+        </div>
+      </sc-if>
+
   </div>
 </div>
 
