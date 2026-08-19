@@ -247,12 +247,25 @@ class Component extends DCLogic {
   }
 
   // Where to send the user once Frappe has issued a session.
+  //
+  // Frappe returns home_page WITHOUT a leading slash ("desk", not "/desk"),
+  // so it must be normalised before joining, or you land on the nonsense
+  // host app.matxchange.co.kedesk.
   destination(data) {
+    let path = (data && data.home_page) || this.afterLogin;
+
     try {
       const requested = new URLSearchParams(window.location.search).get('redirect-to');
-      if (requested && requested.startsWith('/')) return this.api + requested;
+      if (requested) path = requested;
     } catch (e) {}
-    return this.api + ((data && data.home_page) || this.afterLogin);
+
+    if (!path) path = this.afterLogin;
+
+    // An absolute URL is used as-is.
+    if (/^https?:\/\//i.test(path)) return path;
+
+    if (path.charAt(0) !== '/') path = '/' + path;
+    return this.api + path;
   }
 
   handleSubmit = async (e) => {
