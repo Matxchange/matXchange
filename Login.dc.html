@@ -289,8 +289,25 @@ class Component extends DCLogic {
     }
   };
 
-  loginWithGoogle = () => {
-    window.location.href = this.api + '/api/method/frappe.integrations.oauth2_logins.login_via_google';
+  loginWithGoogle = async () => {
+    this.setState({ loading: true, error: '' });
+    try {
+      const res = await fetch(this.api + '/api/method/matxchange.api.google_login_url', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ redirect_to: this.afterLogin }),
+      });
+      const data = await res.json();
+      const url = data && data.message && data.message.url;
+      if (!url) throw new Error(this.readError(data, res.status));
+      window.location.href = url;
+    } catch (err) {
+      this.setState({
+        loading: false,
+        error: err.message || 'Google sign-in is unavailable right now.',
+      });
+    }
   };
 
   startEmailLink = () => {
@@ -321,10 +338,15 @@ class Component extends DCLogic {
       });
 
       // A 404 means this Frappe version doesn't expose the endpoint, or
-      // "Login with email link" is switched off in System Settings. Fall
-      // back to Frappe's own login page rather than dead-ending.
+      // "Login with email link" is switched off in System Settings. Say so
+      // rather than bouncing to Frappe's login page, which now redirects
+      // back here and would loop.
       if (res.status === 404) {
-        window.location.href = this.api + '/login';
+        this.setState({
+          loading: false,
+          error: 'Email-link login isn\u2019t available. Use your password instead.',
+          view: 'password',
+        });
         return;
       }
 
