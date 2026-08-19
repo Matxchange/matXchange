@@ -209,12 +209,16 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
+  api = 'https://app.matxchange.co.ke';
+
   state = {
     step: 1,
     entering: false,
     showPassword: false,
     isIOS: false,
     confirmScale: 0,
+    loading: false,
+    error: '',
     formData: {
       name: '', email: '', phone: '', company: '', role: 'Waste Generator', password: '',
     },
@@ -248,19 +252,91 @@ class Component extends DCLogic {
     });
   };
 
+  // Frappe buries readable messages inside _server_messages.
+  readError(data, status) {
+    try {
+      const msgs = JSON.parse(data._server_messages || '[]');
+      const text = msgs.map(m => JSON.parse(m).message).join(' ');
+      if (text) return text.replace(/<[^>]*>/g, '').trim();
+    } catch (e) {}
+    if (status === 429) return 'Too many attempts. Please try again in an hour.';
+    if (data && data.message) return String(data.message).replace(/<[^>]*>/g, '').trim();
+    return 'Could not create your account. Please try again.';
+  }
+
+  validateStep = () => {
+    const { step, formData } = this.state;
+    if (step === 1) {
+      if (!(formData.name || '').trim()) return 'Please enter your full name.';
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test((formData.email || '').trim())) {
+        return 'That email address doesn\u2019t look right.';
+      }
+    }
+    if (step === 4) {
+      if ((formData.password || '').length < 8) {
+        return 'Your password must be at least 8 characters.';
+      }
+    }
+    return '';
+  };
+
   goNext = () => {
+    const problem = this.validateStep();
+    if (problem) { this.setState({ error: problem }); return; }
+    this.setState({ error: '' });
     if (this.state.step < 5) this.animateTo(this.state.step + 1);
   };
 
   goBack = () => {
+    this.setState({ error: '' });
     if (this.state.step > 1) this.animateTo(this.state.step - 1);
+  };
+
+  submit = async () => {
+    const problem = this.validateStep();
+    if (problem) { this.setState({ error: problem }); return; }
+
+    const f = this.state.formData;
+    this.setState({ loading: true, error: '' });
+
+    try {
+      const res = await fetch(this.api + '/api/method/matxchange.api.register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({
+          full_name: (f.name || '').trim(),
+          email: (f.email || '').trim().toLowerCase(),
+          password: f.password,
+          phone: (f.phone || '').trim(),
+          company: (f.company || '').trim(),
+          role: f.role,
+        }),
+      });
+
+      let data = {};
+      try { data = await res.json(); } catch (err) {}
+
+      if (!res.ok) throw new Error(this.readError(data, res.status));
+
+      const payload = (data && data.message) || {};
+      if (payload.status === 'exists') throw new Error(payload.message);
+
+      this.setState({ loading: false });
+      this.animateTo(5);
+    } catch (err) {
+      this.setState({
+        loading: false,
+        error: err.message || 'Could not reach the server. Check your connection.',
+      });
+    }
   };
 
   togglePassword = () => this.setState(s => ({ showPassword: !s.showPassword }));
 
   setField = (field) => (e) => {
     const value = e.target.value;
-    this.setState(s => ({ formData: { ...s.formData, [field]: value } }));
+    this.setState(s => ({ formData: { ...s.formData, [field]: value }, error: '' }));
   };
 
   selectRole = (role) => this.setState(s => ({ formData: { ...s.formData, role } }));
@@ -272,18 +348,8 @@ class Component extends DCLogic {
     transition: 'background 0.15s ease',
   };
 
-  passwordStrength(pw) {
-    if (!pw) return 0;
-    let score = 0;
-    if (pw.length >= 8) score++;
-    if (/[A-Z]/.test(pw) && /[a-z]/.test(pw)) score++;
-    if (/[0-9]/.test(pw)) score++;
-    if (/[^A-Za-z0-9]/.test(pw)) score++;
-    return score;
-  }
-
   renderVals() {
-    const { step, formData, entering } = this.state;
+    const { step, formData, entering, loading } = this.state;
     const pw = formData.password || '';
     const reqChecks = [
       { label: 'At least 8 characters', met: pw.length >= 8 },
@@ -357,17 +423,18 @@ class Component extends DCLogic {
       dots: Array.from({ length: 16 }, () => ({})),
       confirmScale: this.state.confirmScale === 1 ? 'scale(1)' : 'scale(0.4)',
       showNavButtons: step < 5,
-      showBack: step > 1,
+      showBack: step > 1 && !loading,
       goBack: this.goBack,
-      primaryAction: step === 4 ? this.goNext : this.goNext,
-      primaryLabel: step === 4 ? 'Create account' : 'Continue',
+      primaryAction: step === 4 ? this.submit : this.goNext,
+      primaryLabel: loading ? 'Creating account\u2026' : (step === 4 ? 'Create account' : 'Continue'),
+      error: this.state.error,
+      hasError: !!this.state.error,
       confirmationHeadline: formData.name ? `Welcome, ${formData.name.split(' ')[0]}!` : 'Welcome to Matxchange!',
       confirmationCompanySuffix: formData.company ? ` at ${formData.company}` : '',
       showFooterLink: step < 5,
     };
   }
 }
-
 </script>
 </body>
 </html>
