@@ -45,7 +45,7 @@
 
   <!-- nav -->
   <div style="position:relative; z-index:1; display:flex; align-items:center; justify-content:space-between; padding: 24px 6vw;">
-    <a href="Landing.dc.html" style="text-decoration:none; display:flex; align-items:center;">
+    <a href="/" style="text-decoration:none; display:flex; align-items:center;">
       <img src="assets/mx-logo.png" alt="Matxchange" style="height:30px; width:auto; display:block;"></img>
     </a>
     <div style="font-size:14px; color:#6B655C;">New here? <a href="Signup.dc.html" style="color:#1C1A17; font-weight:600; text-decoration:none;">Sign up</a></div>
@@ -66,14 +66,14 @@
 
         <div>
           <label style="display:block; font-size:13px; font-weight:600; color:#1C1A17; margin-bottom:7px;">Email address</label>
-          <div style="display:flex; align-items:center; gap:11px; background:#F7F4EE; border:1px solid #E7E1D6; border-radius:12px; padding:11px 13px; style-focus:{border-color:#8A5A2E}">
+          <div style="display:flex; align-items:center; gap:11px; background:#F7F4EE; border:1px solid #E7E1D6; border-radius:12px; padding:11px 13px;">
             <span style="width:32px; height:32px; border-radius:9px; background:#F1E7D6; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
                 <rect x="3" y="5" width="18" height="14" rx="2.5" stroke="#8A5A2E" stroke-width="1.7"></rect>
                 <path d="M4 7L12 13L20 7" stroke="#8A5A2E" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>
               </svg>
             </span>
-            <input type="email" placeholder="jane@example.com" style="border:none; background:transparent; width:100%; font-size:15px; color:#1C1A17; font-family:'IBM Plex Sans', sans-serif;"></input>
+            <input type="email" value="{{ email }}" onChange="{{ setEmail }}" placeholder="jane@example.com" style="border:none; background:transparent; width:100%; font-size:15px; color:#1C1A17; font-family:'IBM Plex Sans', sans-serif;"></input>
           </div>
         </div>
 
@@ -90,12 +90,19 @@
                 <circle cx="12" cy="15" r="1.5" fill="#5F8A5A"></circle>
               </svg>
             </span>
-            <input type="{{ passwordType }}" placeholder="••••••••" style="border:none; background:transparent; width:100%; font-size:15px; color:#1C1A17; font-family:'IBM Plex Sans', sans-serif;"></input>
+            <input type="{{ passwordType }}" value="{{ password }}" onChange="{{ setPassword }}" placeholder="••••••••" style="border:none; background:transparent; width:100%; font-size:15px; color:#1C1A17; font-family:'IBM Plex Sans', sans-serif;"></input>
             <button type="button" onClick="{{ togglePassword }}" style="border:none; background:transparent; color:#6B655C; font-size:13px; font-weight:600; cursor:pointer; font-family:'IBM Plex Sans', sans-serif;">{{ toggleLabel }}</button>
           </div>
         </div>
 
-        <button type="submit" style="margin-top:8px; width:100%; padding:14px; background:#1C1A17; color:#FBF9F5; border:none; border-radius:12px; font-size:15px; font-weight:600; font-family:'IBM Plex Sans', sans-serif; cursor:pointer;" style-hover="{background:#332F29}">Log in</button>
+        <sc-if value="{{ hasError }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; align-items:flex-start; gap:9px; background:#FDF0EE; border:1px solid #F3D2CC; border-radius:11px; padding:11px 13px; font-size:13.5px; line-height:1.45; color:#9B3A28;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" style="flex-shrink:0; margin-top:1px;"><circle cx="12" cy="12" r="9" stroke="#C0503A" stroke-width="1.8"></circle><path d="M12 7.5v5" stroke="#C0503A" stroke-width="1.8" stroke-linecap="round"></path><circle cx="12" cy="16" r="1" fill="#C0503A"></circle></svg>
+            <span>{{ error }}</span>
+          </div>
+        </sc-if>
+
+        <button type="submit" style="{{ submitStyle }}">{{ submitLabel }}</button>
       </form>
 
       <div style="display:flex; align-items:center; gap:14px; margin:26px 0;">
@@ -105,7 +112,7 @@
       </div>
 
       <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:10px;">
-        <button style="display:inline-flex; align-items:center; gap:8px; padding:11px 18px; background:#FFFFFF; border:1px solid #E7E1D6; border-radius:100px; font-size:14px; font-weight:600; color:#1C1A17; cursor:pointer; font-family:'IBM Plex Sans', sans-serif; transition:background 0.15s ease, border-color 0.15s ease;" style-hover="{background:#F7F4EE; borderColor:#D9CFBE}">
+        <button type="button" onClick="{{ loginWithGoogle }}" style="display:inline-flex; align-items:center; gap:8px; padding:11px 18px; background:#FFFFFF; border:1px solid #E7E1D6; border-radius:100px; font-size:14px; font-weight:600; color:#1C1A17; cursor:pointer; font-family:'IBM Plex Sans', sans-serif; transition:background 0.15s ease, border-color 0.15s ease;" style-hover="{background:#F7F4EE; borderColor:#D9CFBE}">
           <svg width="17" height="17" viewBox="0 0 18 18">
             <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.259h2.908c1.702-1.567 2.684-3.874 2.684-6.617z"></path>
             <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"></path>
@@ -115,21 +122,9 @@
           Google
         </button>
 
-        <sc-if value="{{ isIOS }}" hint-placeholder-val="{{ false }}">
-          <button style="display:inline-flex; align-items:center; gap:8px; padding:11px 18px; background:#FFFFFF; border:1px solid #E7E1D6; border-radius:100px; font-size:14px; font-weight:600; color:#1C1A17; cursor:pointer; font-family:'IBM Plex Sans', sans-serif; transition:background 0.15s ease, border-color 0.15s ease;" style-hover="{background:#F7F4EE; borderColor:#D9CFBE}">
-            <svg width="15" height="15" viewBox="0 0 24 24"><path fill="#000000" d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.32.03-1.74-.78-3.24-.78-1.51 0-1.97.76-3.22.8-1.29.05-2.27-1.34-3.1-2.57C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.5 1.28-.02 2.5.87 3.28.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"></path></svg>
-            Apple
-          </button>
-        </sc-if>
-
-        <button style="display:inline-flex; align-items:center; gap:8px; padding:11px 18px; background:#FFFFFF; border:1px solid #E7E1D6; border-radius:100px; font-size:14px; font-weight:600; color:#1C1A17; cursor:pointer; font-family:'IBM Plex Sans', sans-serif; transition:background 0.15s ease, border-color 0.15s ease;" style-hover="{background:#F7F4EE; borderColor:#D9CFBE}">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="6.5" y="2" width="11" height="20" rx="3" stroke="#1C1A17" stroke-width="1.7"></rect><path d="M10.5 5h3" stroke="#1C1A17" stroke-width="1.7" stroke-linecap="round"></path><circle cx="12" cy="18.5" r="1" fill="#1C1A17"></circle></svg>
-          Phone
-        </button>
-
-        <button style="display:inline-flex; align-items:center; gap:8px; padding:11px 18px; background:#FFFFFF; border:1px solid #E7E1D6; border-radius:100px; font-size:14px; font-weight:600; color:#1C1A17; cursor:pointer; font-family:'IBM Plex Sans', sans-serif; transition:background 0.15s ease, border-color 0.15s ease;" style-hover="{background:#F7F4EE; borderColor:#D9CFBE}">
+        <button type="button" onClick="{{ loginWithEmailLink }}" style="display:inline-flex; align-items:center; gap:8px; padding:11px 18px; background:#FFFFFF; border:1px solid #E7E1D6; border-radius:100px; font-size:14px; font-weight:600; color:#1C1A17; cursor:pointer; font-family:'IBM Plex Sans', sans-serif; transition:background 0.15s ease, border-color 0.15s ease;" style-hover="{background:#F7F4EE; borderColor:#D9CFBE}">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2.5" stroke="#1C1A17" stroke-width="1.7"></rect><path d="M4 7L12 13L20 7" stroke="#1C1A17" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-          Email
+          Email link
         </button>
       </div>
 
@@ -145,7 +140,18 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { showPassword: false, mounted: false, isIOS: false };
+  api = 'https://app.matxchange.co.ke';
+  afterLogin = '/app';
+
+  state = {
+    showPassword: false,
+    mounted: false,
+    isIOS: false,
+    email: '',
+    password: '',
+    error: '',
+    loading: false,
+  };
 
   componentDidMount() {
     requestAnimationFrame(() => this.setState({ mounted: true }));
@@ -158,20 +164,97 @@ class Component extends DCLogic {
     this.setState(s => ({ showPassword: !s.showPassword }));
   };
 
-  handleSubmit = (e) => {
+  setField = (field) => (e) => {
+    const value = e.target.value;
+    this.setState({ [field]: value, error: '' });
+  };
+
+  // Frappe buries readable messages inside _server_messages.
+  readError(data, status) {
+    try {
+      const msgs = JSON.parse(data._server_messages || '[]');
+      const text = msgs.map(m => JSON.parse(m).message).join(' ');
+      if (text) return text.replace(/<[^>]*>/g, '').trim();
+    } catch (e) {}
+    if (status === 401) return 'That email and password don\u2019t match an account.';
+    if (data && data.message) return String(data.message).replace(/<[^>]*>/g, '').trim();
+    return 'Could not log in. Please try again.';
+  }
+
+  handleSubmit = async (e) => {
     e.preventDefault();
+    const email = (this.state.email || '').trim();
+    const password = this.state.password || '';
+
+    if (!email || !password) {
+      this.setState({ error: 'Enter your email and password.' });
+      return;
+    }
+
+    this.setState({ loading: true, error: '' });
+
+    try {
+      const res = await fetch(this.api + '/api/method/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ usr: email, pwd: password }),
+      });
+
+      let data = {};
+      try { data = await res.json(); } catch (err) {}
+
+      if (!res.ok) throw new Error(this.readError(data, res.status));
+
+      window.location.href = this.api + (data.home_page || this.afterLogin);
+    } catch (err) {
+      this.setState({
+        error: err.message || 'Could not reach the server. Check your connection.',
+        loading: false,
+      });
+    }
+  };
+
+  loginWithGoogle = () => {
+    window.location.href = this.api + '/api/method/frappe.integrations.oauth2_logins.login_via_google';
+  };
+
+  loginWithEmailLink = () => {
+    window.location.href = this.api + '/login';
   };
 
   renderVals() {
+    const loading = this.state.loading;
     return {
+      email: this.state.email,
+      password: this.state.password,
+      setEmail: this.setField('email'),
+      setPassword: this.setField('password'),
+      error: this.state.error,
+      hasError: !!this.state.error,
       passwordType: this.state.showPassword ? 'text' : 'password',
       toggleLabel: this.state.showPassword ? 'Hide' : 'Show',
       togglePassword: this.togglePassword,
       handleSubmit: this.handleSubmit,
+      loginWithGoogle: this.loginWithGoogle,
+      loginWithEmailLink: this.loginWithEmailLink,
+      submitLabel: loading ? 'Logging in\u2026' : 'Log in',
+      submitStyle: {
+        marginTop: '8px',
+        width: '100%',
+        padding: '14px',
+        background: loading ? '#4A453D' : '#1C1A17',
+        color: '#FBF9F5',
+        border: 'none',
+        borderRadius: '12px',
+        fontSize: '15px',
+        fontWeight: 600,
+        fontFamily: "'IBM Plex Sans', sans-serif",
+        cursor: loading ? 'default' : 'pointer',
+      },
       mountedOpacity: this.state.mounted ? 1 : 0,
       mountedTransform: this.state.mounted ? 'translateY(0)' : 'translateY(14px)',
       isIOS: this.state.isIOS,
-      dots: Array.from({ length: 16 }, () => ({})),
     };
   }
 }
