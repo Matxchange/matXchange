@@ -232,6 +232,23 @@ class Component extends DCLogic {
     this.setState({ [field]: value, error: '' });
   };
 
+  // Mirror of normalize_phone() in api.py. Frappe matches mobile logins
+  // against User.mobile_no exactly, so "0712 345 678" and "+254712345678"
+  // must resolve to the same string on both sides.
+  normalizeIdentifier(value) {
+    const raw = (value || '').trim();
+    if (!raw || raw.indexOf('@') !== -1) return raw;      // email or username
+
+    let digits = raw.replace(/[^0-9]/g, '');
+    if (!digits) return raw;
+
+    if (digits.indexOf('254') === 0) digits = digits.slice(3);
+    else if (digits.charAt(0) === '0') digits = digits.slice(1);
+
+    if (digits.length !== 9) return raw;
+    return '+254' + digits;
+  }
+
   // Frappe buries readable messages inside _server_messages.
   readError(data, status) {
     try {
@@ -270,11 +287,11 @@ class Component extends DCLogic {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    const email = (this.state.email || '').trim();
+    const identifier = this.normalizeIdentifier(this.state.email);
     const password = this.state.password || '';
 
-    if (!email || !password) {
-      this.setState({ error: 'Enter your email and password.' });
+    if (!identifier || !password) {
+      this.setState({ error: 'Enter your email or phone number, and your password.' });
       return;
     }
 
@@ -285,7 +302,7 @@ class Component extends DCLogic {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         credentials: 'include',
-        body: JSON.stringify({ usr: email, pwd: password }),
+        body: JSON.stringify({ usr: identifier, pwd: password }),
       });
 
       let data = {};
@@ -309,7 +326,7 @@ class Component extends DCLogic {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         credentials: 'include',
-        body: JSON.stringify({ redirect_to: this.afterLogin }),
+        body: JSON.stringify({ redirect_to: '/complete-profile' }),
       });
       const data = await res.json();
       const url = data && data.message && data.message.url;
@@ -343,31 +360,24 @@ class Component extends DCLogic {
     this.setState({ loading: true, error: '' });
 
     try {
-      const res = await fetch(this.api + '/api/method/frappe.www.login.send_login_link', {
+      const res = await fetch(this.api + '/api/method/matxchange.api.email_login_link', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         credentials: 'include',
         body: JSON.stringify({ email: email }),
       });
 
-      // A 404 means this Frappe version doesn't expose the endpoint, or
-      // "Login with email link" is switched off in System Settings. Say so
-      // rather than bouncing to Frappe's login page, which now redirects
-      // back here and would loop.
-      if (res.status === 404) {
-        this.setState({
-          loading: false,
-          error: 'Email-link login isn\u2019t available. Use your password instead.',
-          view: 'password',
-        });
-        return;
-      }
+      let data = {};
+      try { data = await res.json(); } catch (err) {}
 
-      // Any other failure is reported as success on purpose: revealing
-      // which emails have accounts is an information leak.
+      if (!res.ok) throw new Error(this.readError(data, res.status));
+
       this.setState({ loading: false, view: 'linkSent' });
     } catch (err) {
-      this.setState({ loading: false, view: 'linkSent' });
+      this.setState({
+        loading: false,
+        error: err.message || 'Could not reach the server. Check your connection.',
+      });
     }
   };
 
