@@ -45,10 +45,10 @@
 
   <!-- nav -->
   <div style="position:relative; z-index:1; display:flex; align-items:center; justify-content:space-between; padding: 24px 6vw;">
-    <a href="index.html" style="text-decoration:none; display:flex; align-items:center;">
+    <a href="/" style="text-decoration:none; display:flex; align-items:center;">
       <img src="assets/mx-logo.png" alt="Matxchange" style="height:30px; width:auto; display:block;"></img>
     </a>
-    <div style="font-size:14px; color:#6B655C;">Already have an account? <a href="Login.dc.html" style="color:#1C1A17; font-weight:600; text-decoration:none;">Log in</a></div>
+    <div style="font-size:14px; color:#6B655C;">Already have an account? <a href="/login" style="color:#1C1A17; font-weight:600; text-decoration:none;">Log in</a></div>
   </div>
 
   <!-- content -->
@@ -78,22 +78,15 @@
         <!-- STEP 1: contact -->
         <sc-if value="{{ isStep1 }}" hint-placeholder-val="{{ false }}">
           <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-bottom:20px;">
-            <button type="button" style="display:inline-flex; align-items:center; gap:8px; padding:11px 18px; background:#FFFFFF; border:1px solid #E7E1D6; border-radius:100px; font-size:14px; font-weight:600; color:#1C1A17; cursor:pointer; font-family:'IBM Plex Sans', sans-serif; transition:background 0.15s ease, border-color 0.15s ease;" style-hover="{background:#F7F4EE; borderColor:#D9CFBE}">
+            <button type="button" onClick="{{ signUpWithGoogle }}" style="{{ googleBtnStyle }}">
               <svg width="17" height="17" viewBox="0 0 18 18">
                 <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.259h2.908c1.702-1.567 2.684-3.874 2.684-6.617z"></path>
                 <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"></path>
                 <path fill="#FBBC05" d="M3.964 10.71c-.18-.54-.282-1.117-.282-1.71s.102-1.17.282-1.71V4.958H.957C.347 6.173 0 7.548 0 9s.348 2.827.957 4.042l3.007-2.332z"></path>
                 <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z"></path>
               </svg>
-              Google
+              {{ googleLabel }}
             </button>
-
-            <sc-if value="{{ isIOS }}" hint-placeholder-val="{{ false }}">
-              <button type="button" style="display:inline-flex; align-items:center; gap:8px; padding:11px 18px; background:#FFFFFF; border:1px solid #E7E1D6; border-radius:100px; font-size:14px; font-weight:600; color:#1C1A17; cursor:pointer; font-family:'IBM Plex Sans', sans-serif; transition:background 0.15s ease, border-color 0.15s ease;" style-hover="{background:#F7F4EE; borderColor:#D9CFBE}">
-                <svg width="15" height="15" viewBox="0 0 24 24"><path fill="#000000" d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.32.03-1.74-.78-3.24-.78-1.51 0-1.97.76-3.22.8-1.29.05-2.27-1.34-3.1-2.57C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.5 1.28-.02 2.5.87 3.28.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"></path></svg>
-                Apple
-              </button>
-            </sc-if>
           </div>
           <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px;">
             <div style="flex:1; height:1px; background:#E7E1D6;"></div>
@@ -104,15 +97,15 @@
           <div style="display:flex; flex-direction:column; gap:16px;">
             <div>
               <label style="display:block; font-size:13px; font-weight:600; color:#1C1A17; margin-bottom:7px;">Full name</label>
-              <input type="text" value="{{ formData.name }}" onChange="{{ setName }}" placeholder="Jane Wanjiru" style="width:100%; border:1px solid #E7E1D6; background:#F7F4EE; border-radius:12px; padding:13px 14px; font-size:15px; color:#1C1A17; font-family:'IBM Plex Sans', sans-serif;"></input>
+              <input type="text" autocomplete="name" value="{{ formData.name }}" onChange="{{ setName }}" placeholder="Jane Wanjiru" style="width:100%; border:1px solid #E7E1D6; background:#F7F4EE; border-radius:12px; padding:13px 14px; font-size:15px; color:#1C1A17; font-family:'IBM Plex Sans', sans-serif;"></input>
             </div>
             <div>
               <label style="display:block; font-size:13px; font-weight:600; color:#1C1A17; margin-bottom:7px;">Email address</label>
-              <input type="email" value="{{ formData.email }}" onChange="{{ setEmail }}" placeholder="jane@example.com" style="width:100%; border:1px solid #E7E1D6; background:#F7F4EE; border-radius:12px; padding:13px 14px; font-size:15px; color:#1C1A17; font-family:'IBM Plex Sans', sans-serif;"></input>
+              <input type="email" autocomplete="email" value="{{ formData.email }}" onChange="{{ setEmail }}" placeholder="jane@example.com" style="width:100%; border:1px solid #E7E1D6; background:#F7F4EE; border-radius:12px; padding:13px 14px; font-size:15px; color:#1C1A17; font-family:'IBM Plex Sans', sans-serif;"></input>
             </div>
             <div>
               <label style="display:block; font-size:13px; font-weight:600; color:#1C1A17; margin-bottom:7px;">Phone number</label>
-              <input type="tel" value="{{ formData.phone }}" onChange="{{ setPhone }}" placeholder="+254 7XX XXX XXX" style="width:100%; border:1px solid #E7E1D6; background:#F7F4EE; border-radius:12px; padding:13px 14px; font-size:15px; color:#1C1A17; font-family:'IBM Plex Sans', sans-serif;"></input>
+              <input type="tel" autocomplete="tel" value="{{ formData.phone }}" onChange="{{ setPhone }}" placeholder="+254 7XX XXX XXX" style="width:100%; border:1px solid #E7E1D6; background:#F7F4EE; border-radius:12px; padding:13px 14px; font-size:15px; color:#1C1A17; font-family:'IBM Plex Sans', sans-serif;"></input>
             </div>
           </div>
         </sc-if>
@@ -122,7 +115,7 @@
           <div style="display:flex; flex-direction:column; gap:16px; min-height:180px;">
             <div>
               <label style="display:block; font-size:13px; font-weight:600; color:#1C1A17; margin-bottom:7px;">Company / Organization</label>
-              <input type="text" value="{{ formData.company }}" onChange="{{ setCompany }}" placeholder="e.g. Nairobi Recyclers Ltd" style="width:100%; border:1px solid #E7E1D6; background:#F7F4EE; border-radius:12px; padding:13px 14px; font-size:15px; color:#1C1A17; font-family:'IBM Plex Sans', sans-serif;"></input>
+              <input type="text" autocomplete="organization" value="{{ formData.company }}" onChange="{{ setCompany }}" placeholder="e.g. Nairobi Recyclers Ltd" style="width:100%; border:1px solid #E7E1D6; background:#F7F4EE; border-radius:12px; padding:13px 14px; font-size:15px; color:#1C1A17; font-family:'IBM Plex Sans', sans-serif;"></input>
               <div style="font-size:12.5px; color:#A79F91; margin-top:8px;">Operating solo? Just use your own name.</div>
             </div>
           </div>
@@ -152,7 +145,7 @@
                 <rect x="4" y="10" width="16" height="10" rx="2" stroke="#8A7F6E" stroke-width="1.6"></rect>
                 <path d="M7.5 10V7.5a4.5 4.5 0 0 1 9 0V10" stroke="#8A7F6E" stroke-width="1.6"></path>
               </svg>
-              <input type="{{ passwordType }}" value="{{ formData.password }}" onChange="{{ setPassword }}" placeholder="At least 8 characters" style="border:none; background:transparent; width:100%; font-size:15px; color:#1C1A17; font-family:'IBM Plex Sans', sans-serif;"></input>
+              <input type="{{ passwordType }}" autocomplete="new-password" value="{{ formData.password }}" onChange="{{ setPassword }}" placeholder="At least 8 characters" style="border:none; background:transparent; width:100%; font-size:15px; color:#1C1A17; font-family:'IBM Plex Sans', sans-serif;"></input>
               <button type="button" onClick="{{ togglePassword }}" style="border:none; background:transparent; color:#6B655C; font-size:13px; font-weight:600; cursor:pointer; font-family:'IBM Plex Sans', sans-serif;">{{ toggleLabel }}</button>
             </div>
             <div style="display:flex; flex-direction:column; gap:8px; margin-top:16px;">
@@ -181,34 +174,34 @@
 
       </div>
 
+      <sc-if value="{{ hasError }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex; align-items:flex-start; gap:9px; background:#FDF0EE; border:1px solid #F3D2CC; border-radius:11px; padding:11px 13px; font-size:13.5px; line-height:1.45; color:#9B3A28; margin-top:18px;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" style="flex-shrink:0; margin-top:1px;"><circle cx="12" cy="12" r="9" stroke="#C0503A" stroke-width="1.8"></circle><path d="M12 7.5v5" stroke="#C0503A" stroke-width="1.8" stroke-linecap="round"></path><circle cx="12" cy="16" r="1" fill="#C0503A"></circle></svg>
+          <span>{{ error }}</span>
+        </div>
+      </sc-if>
+
       <!-- nav buttons -->
       <sc-if value="{{ showNavButtons }}" hint-placeholder-val="{{ true }}">
         <div style="display:flex; gap:10px; margin-top:26px;">
           <sc-if value="{{ showBack }}" hint-placeholder-val="{{ false }}">
             <button type="button" onClick="{{ goBack }}" style="padding:14px 20px; background:#FFFFFF; color:#1C1A17; border:1px solid #E7E1D6; border-radius:12px; font-size:15px; font-weight:600; font-family:'IBM Plex Sans', sans-serif; cursor:pointer;" style-hover="{background:#F7F4EE}">Back</button>
           </sc-if>
-          <button type="button" onClick="{{ primaryAction }}" style="flex:1; padding:14px; background:#1C1A17; color:#FBF9F5; border:none; border-radius:12px; font-size:15px; font-weight:600; font-family:'IBM Plex Sans', sans-serif; cursor:pointer;" style-hover="{background:#332F29}">{{ primaryLabel }}</button>
+          <button type="button" onClick="{{ primaryAction }}" style="{{ primaryStyle }}">{{ primaryLabel }}</button>
         </div>
       </sc-if>
 
       <sc-if value="{{ isStep5 }}" hint-placeholder-val="{{ false }}">
-        <a href="Login.dc.html" style="margin-top:26px; display:block; text-align:center; padding:14px; background:#1C1A17; color:#FBF9F5; border-radius:12px; font-size:15px; font-weight:600; text-decoration:none;">Go to login</a>
+        <a href="/login" style="margin-top:26px; display:block; text-align:center; padding:14px; background:#1C1A17; color:#FBF9F5; border-radius:12px; font-size:15px; font-weight:600; text-decoration:none;">Go to login</a>
       </sc-if>
 
     </div>
 
     <sc-if value="{{ showFooterLink }}" hint-placeholder-val="{{ true }}">
       <div style="margin-top:28px; font-size:14px; color:#6B655C;">
-        Already have an account? <a href="Login.dc.html" style="color:#1C1A17; font-weight:600; text-decoration:none; border-bottom:1px solid #1C1A17;">Log in</a>
+        Already have an account? <a href="/login" style="color:#1C1A17; font-weight:600; text-decoration:none; border-bottom:1px solid #1C1A17;">Log in</a>
       </div>
     </sc-if>
-
-          <sc-if value="{{ hasError }}" hint-placeholder-val="{{ false }}">
-        <div style="display:flex; align-items:flex-start; gap:9px; background:#FDF0EE; border:1px solid #F3D2CC; border-radius:11px; padding:11px 13px; font-size:13.5px; line-height:1.45; color:#9B3A28; margin-top:18px;">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" style="flex-shrink:0; margin-top:1px;"><circle cx="12" cy="12" r="9" stroke="#C0503A" stroke-width="1.8"></circle><path d="M12 7.5v5" stroke="#C0503A" stroke-width="1.8" stroke-linecap="round"></path><circle cx="12" cy="16" r="1" fill="#C0503A"></circle></svg>
-          <span>{{ error }}</span>
-        </div>
-      </sc-if>
 
   </div>
 </div>
@@ -222,20 +215,14 @@ class Component extends DCLogic {
     step: 1,
     entering: false,
     showPassword: false,
-    isIOS: false,
     confirmScale: 0,
     loading: false,
+    googleLoading: false,
     error: '',
     formData: {
       name: '', email: '', phone: '', company: '', role: 'Waste Generator', password: '',
     },
   };
-
-  componentDidMount() {
-    const ua = navigator.userAgent || '';
-    const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-    this.setState({ isIOS });
-  }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.step === 5 && prevState.step !== 5) {
@@ -244,13 +231,6 @@ class Component extends DCLogic {
   }
 
   roleOptions = ['Waste Generator', 'Recycler', 'Aggregator', 'Buyer'];
-
-  stepLabels = {
-    1: 'Your details',
-    2: 'Company',
-    3: 'Account type',
-    4: 'Password',
-  };
 
   animateTo = (step) => {
     this.setState({ step, entering: true });
@@ -271,12 +251,44 @@ class Component extends DCLogic {
     return 'Could not create your account. Please try again.';
   }
 
+  // Google only hands back a name and email, so a new Google user is sent to
+  // /complete-profile to supply the phone, company and account type this
+  // wizard would otherwise collect.
+  signUpWithGoogle = async () => {
+    if (this.state.googleLoading) return;
+    this.setState({ googleLoading: true, error: '' });
+    try {
+      const res = await fetch(this.api + '/api/method/matxchange.api.google_login_url', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ redirect_to: '/complete-profile' }),
+      });
+
+      let data = {};
+      try { data = await res.json(); } catch (e) {}
+
+      const url = data && data.message && data.message.url;
+      if (!url) throw new Error(this.readError(data, res.status));
+
+      window.location.href = url;
+    } catch (err) {
+      this.setState({
+        googleLoading: false,
+        error: err.message || 'Google sign-up is unavailable right now.',
+      });
+    }
+  };
+
   validateStep = () => {
     const { step, formData } = this.state;
     if (step === 1) {
       if (!(formData.name || '').trim()) return 'Please enter your full name.';
       if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test((formData.email || '').trim())) {
         return 'That email address doesn\u2019t look right.';
+      }
+      if ((formData.phone || '').replace(/[^0-9]/g, '').length < 9) {
+        return 'Enter a valid phone number.';
       }
     }
     if (step === 4) {
@@ -339,27 +351,6 @@ class Component extends DCLogic {
     }
   };
 
-  loginWithGoogle = async () => {
-    this.setState({ loading: true, error: '' });
-    try {
-      const res = await fetch(this.api + '/api/method/matxchange.api.google_login_url', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        credentials: 'include',
-        body: JSON.stringify({ redirect_to: '/complete-profile' }),
-      });
-      const data = await res.json();
-      const url = data && data.message && data.message.url;
-      if (!url) throw new Error(this.readError(data, res.status));
-      window.location.href = url;
-    } catch (err) {
-      this.setState({
-        loading: false,
-        error: err.message || 'Google sign-up is unavailable right now.',
-      });
-    }
-  };
-
   togglePassword = () => this.setState(s => ({ showPassword: !s.showPassword }));
 
   setField = (field) => (e) => {
@@ -367,7 +358,7 @@ class Component extends DCLogic {
     this.setState(s => ({ formData: { ...s.formData, [field]: value }, error: '' }));
   };
 
-  selectRole = (role) => this.setState(s => ({ formData: { ...s.formData, role } }));
+  selectRole = (role) => this.setState(s => ({ formData: { ...s.formData, role }, error: '' }));
 
   baseBtnStyle = {
     display: 'flex', alignItems: 'center', gap: '9px', padding: '12px 14px',
@@ -377,7 +368,7 @@ class Component extends DCLogic {
   };
 
   renderVals() {
-    const { step, formData, entering, loading } = this.state;
+    const { step, formData, entering, loading, googleLoading } = this.state;
     const pw = formData.password || '';
     const reqChecks = [
       { label: 'At least 8 characters', met: pw.length >= 8 },
@@ -431,7 +422,6 @@ class Component extends DCLogic {
       headline: headlines[step],
       showProgress: step < 5,
       stepNumber: step,
-      stepLabel: this.stepLabels[step] || '',
       segments,
       isStep1: step === 1, isStep2: step === 2, isStep3: step === 3, isStep4: step === 4, isStep5: step === 5,
       enterOpacity: entering ? 0 : 1,
@@ -446,16 +436,30 @@ class Component extends DCLogic {
       passwordType: this.state.showPassword ? 'text' : 'password',
       toggleLabel: this.state.showPassword ? 'Hide' : 'Show',
       togglePassword: this.togglePassword,
-      loginWithGoogle: this.loginWithGoogle,
       requirements,
-      isIOS: this.state.isIOS,
-      dots: Array.from({ length: 16 }, () => ({})),
+      signUpWithGoogle: this.signUpWithGoogle,
+      googleLabel: googleLoading ? 'Connecting\u2026' : 'Google',
+      googleBtnStyle: {
+        display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '11px 18px',
+        background: '#FFFFFF', border: '1px solid #E7E1D6', borderRadius: '100px',
+        fontSize: '14px', fontWeight: 600, color: '#1C1A17',
+        cursor: googleLoading ? 'default' : 'pointer',
+        opacity: googleLoading ? 0.6 : 1,
+        fontFamily: "'IBM Plex Sans', sans-serif",
+        transition: 'background 0.15s ease, border-color 0.15s ease, opacity 0.15s ease',
+      },
       confirmScale: this.state.confirmScale === 1 ? 'scale(1)' : 'scale(0.4)',
       showNavButtons: step < 5,
       showBack: step > 1 && !loading,
       goBack: this.goBack,
       primaryAction: step === 4 ? this.submit : this.goNext,
       primaryLabel: loading ? 'Creating account\u2026' : (step === 4 ? 'Create account' : 'Continue'),
+      primaryStyle: {
+        flex: 1, padding: '14px', background: loading ? '#4A453D' : '#1C1A17',
+        color: '#FBF9F5', border: 'none', borderRadius: '12px', fontSize: '15px',
+        fontWeight: 600, fontFamily: "'IBM Plex Sans', sans-serif",
+        cursor: loading ? 'default' : 'pointer',
+      },
       error: this.state.error,
       hasError: !!this.state.error,
       confirmationHeadline: formData.name ? `Welcome, ${formData.name.split(' ')[0]}!` : 'Welcome to Matxchange!',
@@ -464,6 +468,7 @@ class Component extends DCLogic {
     };
   }
 }
+
 </script>
 </body>
 </html>
