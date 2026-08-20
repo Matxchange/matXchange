@@ -1,0 +1,26 @@
+{
+  "cleanUrls": false,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/login", "destination": "/Login.dc.html" },
+    { "source": "/signup", "destination": "/Signup.dc.html" },
+    { "source": "/forgot-password", "destination": "/ForgotPassword.dc.html" },
+    { "source": "/complete-profile", "destination": "/CompleteProfile.dc.html" }
+  ],
+  "redirects": [
+    { "source": "/Login.dc.html", "destination": "/login", "permanent": true },
+    { "source": "/Signup.dc.html", "destination": "/signup", "permanent": true },
+    { "source": "/ForgotPassword.dc.html", "destination": "/forgot-password", "permanent": true },
+    { "source": "/CompleteProfile.dc.html", "destination": "/complete-profile", "permanent": true },
+    { "source": "/Landing.dc.html", "destination": "/", "permanent": true }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    }
+  ]
+}
